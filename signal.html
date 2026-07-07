@@ -1,0 +1,1060 @@
+<section class="fd-crisis-dashboard" aria-label="Кризис-панель собственника">
+  <style>
+    .fd-crisis-dashboard,
+    .fd-crisis-dashboard * {
+      box-sizing: border-box;
+    }
+
+    .fd-crisis-dashboard {
+      --fd-crisis-primary: #77408C;
+      --fd-crisis-primary-dark: #5F2F72;
+      --fd-crisis-light: #EDE0F3;
+      --fd-crisis-border: #D9C7E4;
+      --fd-crisis-text: #2A2A2A;
+      --fd-crisis-muted: #5F5F5F;
+      --fd-crisis-white: #FFFFFF;
+      --fd-crisis-green: #4C9F70;
+      --fd-crisis-yellow: #F2B84B;
+      --fd-crisis-red: #D9534F;
+
+      width: 100%;
+      max-width: 1180px;
+      margin: 24px auto;
+      padding: 18px;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--fd-crisis-text);
+      background: var(--fd-crisis-light);
+      border-radius: 22px;
+      box-shadow: 0 18px 50px rgba(119, 64, 140, 0.18);
+    }
+
+    .fd-crisis-dashboard__inner {
+      background: #faf7fc;
+      border: 1px solid var(--fd-crisis-border);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    .fd-crisis-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 22px 24px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--fd-crisis-primary), var(--fd-crisis-primary-dark));
+    }
+
+    .fd-crisis-title {
+      margin: 0 0 6px;
+      font-size: 28px;
+      line-height: 1.1;
+      font-weight: 700;
+    }
+
+    .fd-crisis-subtitle {
+      max-width: 680px;
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.35;
+      opacity: 0.92;
+    }
+
+    .fd-crisis-header__right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 12px;
+      min-width: 260px;
+    }
+
+    .fd-crisis-legend {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+      font-size: 12px;
+      line-height: 1;
+    }
+
+    .fd-crisis-legend__item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 9px;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .fd-crisis-legend__dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #fff;
+    }
+
+    .fd-crisis-legend__dot--green {
+      background: var(--fd-crisis-green);
+    }
+
+    .fd-crisis-legend__dot--yellow {
+      background: var(--fd-crisis-yellow);
+    }
+
+    .fd-crisis-legend__dot--red {
+      background: var(--fd-crisis-red);
+    }
+
+    .fd-crisis-print-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 36px;
+      padding: 8px 14px;
+      color: var(--fd-crisis-primary);
+      font-size: 13px;
+      font-weight: 700;
+      background: #fff;
+      border: 0;
+      border-radius: 999px;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.16);
+    }
+
+    .fd-crisis-print-button:hover {
+      background: #f8f0fb;
+    }
+
+    .fd-crisis-tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      padding: 14px 16px 0;
+      background: #faf7fc;
+    }
+
+    .fd-crisis-tab {
+      min-height: 42px;
+      padding: 9px 12px;
+      color: var(--fd-crisis-primary);
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+      background: #fff;
+      border: 1px solid var(--fd-crisis-border);
+      border-radius: 12px 12px 0 0;
+      cursor: pointer;
+    }
+
+    .fd-crisis-tab--active {
+      color: #fff;
+      background: var(--fd-crisis-primary);
+      border-color: var(--fd-crisis-primary);
+    }
+
+    .fd-crisis-panels {
+      padding: 16px;
+    }
+
+    .fd-crisis-panel {
+      display: none;
+    }
+
+    .fd-crisis-panel--active {
+      display: block;
+    }
+
+    .fd-crisis-panel__head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      padding: 10px 12px;
+      background: var(--fd-crisis-light);
+      border: 1px solid var(--fd-crisis-border);
+      border-radius: 14px;
+    }
+
+    .fd-crisis-panel__icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      color: #fff;
+      font-size: 18px;
+      background: var(--fd-crisis-primary);
+      border-radius: 50%;
+      flex: 0 0 auto;
+    }
+
+    .fd-crisis-panel__title {
+      margin: 0;
+      color: var(--fd-crisis-primary-dark);
+      font-size: 17px;
+      line-height: 1.2;
+      font-weight: 700;
+    }
+
+    .fd-crisis-panel__text {
+      margin: 2px 0 0;
+      color: var(--fd-crisis-muted);
+      font-size: 12px;
+      line-height: 1.25;
+    }
+
+    .fd-crisis-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .fd-crisis-card {
+      position: relative;
+      min-height: 260px;
+      padding: 14px;
+      background: #fff;
+      border: 1px solid var(--fd-crisis-border);
+      border-radius: 16px;
+      box-shadow: 0 10px 22px rgba(119, 64, 140, 0.10);
+      overflow: hidden;
+    }
+
+    .fd-crisis-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 6px;
+      background: var(--fd-crisis-green);
+    }
+
+    .fd-crisis-card--yellow::before {
+      background: var(--fd-crisis-yellow);
+    }
+
+    .fd-crisis-card--red::before {
+      background: var(--fd-crisis-red);
+    }
+
+    .fd-crisis-card__top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+      padding-top: 4px;
+    }
+
+    .fd-crisis-card__title {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.2;
+      font-weight: 700;
+      color: var(--fd-crisis-text);
+    }
+
+    .fd-crisis-status {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 8px;
+      color: #fff;
+      font-size: 11px;
+      line-height: 1;
+      font-weight: 700;
+      border-radius: 999px;
+      white-space: nowrap;
+      background: var(--fd-crisis-green);
+    }
+
+    .fd-crisis-card--yellow .fd-crisis-status {
+      color: #4b3300;
+      background: var(--fd-crisis-yellow);
+    }
+
+    .fd-crisis-card--red .fd-crisis-status {
+      background: var(--fd-crisis-red);
+    }
+
+    .fd-crisis-status__dot {
+      width: 7px;
+      height: 7px;
+      background: currentColor;
+      border-radius: 50%;
+      opacity: 0.75;
+    }
+
+    .fd-crisis-values {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .fd-crisis-value-box {
+      min-height: 70px;
+      padding: 10px;
+      background: #F8F3FA;
+      border: 1px solid var(--fd-crisis-border);
+      border-radius: 12px;
+    }
+
+    .fd-crisis-value-box__label {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--fd-crisis-muted);
+      font-size: 10px;
+      line-height: 1.15;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .fd-crisis-value-box__value {
+      display: block;
+      color: var(--fd-crisis-primary-dark);
+      font-size: 16px;
+      line-height: 1.15;
+      font-weight: 700;
+    }
+
+    .fd-crisis-card__row {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid #eee1f4;
+    }
+
+    .fd-crisis-card__label {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--fd-crisis-primary);
+      font-size: 11px;
+      line-height: 1.2;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .fd-crisis-card__text {
+      margin: 0;
+      color: var(--fd-crisis-text);
+      font-size: 12.5px;
+      line-height: 1.32;
+    }
+
+    .fd-crisis-note {
+      margin: 0 16px 16px;
+      padding: 12px 14px;
+      color: var(--fd-crisis-primary-dark);
+      font-size: 13px;
+      line-height: 1.35;
+      background: #fff;
+      border-left: 5px solid var(--fd-crisis-primary);
+      border-radius: 12px;
+    }
+
+    .fd-crisis-print-title {
+      display: none;
+    }
+
+    @media (max-width: 900px) {
+      .fd-crisis-header {
+        flex-direction: column;
+      }
+
+      .fd-crisis-header__right {
+        align-items: flex-start;
+        min-width: 0;
+      }
+
+      .fd-crisis-legend {
+        justify-content: flex-start;
+      }
+
+      .fd-crisis-tabs {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .fd-crisis-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .fd-crisis-card {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .fd-crisis-dashboard {
+        padding: 10px;
+        border-radius: 16px;
+      }
+
+      .fd-crisis-header {
+        padding: 18px;
+      }
+
+      .fd-crisis-title {
+        font-size: 23px;
+      }
+
+      .fd-crisis-tabs {
+        grid-template-columns: 1fr;
+        padding: 12px 12px 0;
+      }
+
+      .fd-crisis-panels {
+        padding: 12px;
+      }
+
+      .fd-crisis-values {
+        grid-template-columns: 1fr;
+      }
+
+      .fd-crisis-note {
+        margin: 0 12px 12px;
+      }
+    }
+
+    @media print {
+      @page {
+        size: 30cm 20cm landscape;
+        margin: 0.8cm;
+      }
+
+      body * {
+        visibility: hidden;
+      }
+
+      .fd-crisis-dashboard,
+      .fd-crisis-dashboard * {
+        visibility: visible;
+      }
+
+      .fd-crisis-dashboard {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 28.4cm;
+        max-width: none;
+        margin: 0;
+        padding: 0;
+        background: #fff;
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      .fd-crisis-dashboard__inner {
+        border-radius: 0;
+        border: 1px solid #D9C7E4;
+        overflow: visible;
+      }
+
+      .fd-crisis-print-title {
+        display: block;
+        margin: 0;
+        padding: 8px 12px;
+        color: #5F2F72;
+        font-size: 11px;
+        font-weight: 700;
+        background: #EDE0F3;
+      }
+
+      .fd-crisis-header {
+        padding: 12px 14px;
+        gap: 10px;
+        background: #77408C !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .fd-crisis-title {
+        font-size: 20px;
+      }
+
+      .fd-crisis-subtitle {
+        font-size: 10.5px;
+      }
+
+      .fd-crisis-header__right {
+        min-width: 230px;
+      }
+
+      .fd-crisis-legend {
+        gap: 5px;
+        font-size: 9px;
+      }
+
+      .fd-crisis-legend__item {
+        padding: 5px 6px;
+      }
+
+      .fd-crisis-print-button,
+      .fd-crisis-tabs {
+        display: none !important;
+      }
+
+      .fd-crisis-panels {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+        padding: 10px;
+      }
+
+      .fd-crisis-panel {
+        display: block !important;
+      }
+
+      .fd-crisis-panel__head {
+        min-height: 50px;
+        margin-bottom: 6px;
+        padding: 7px;
+        border-radius: 10px;
+        background: #EDE0F3 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .fd-crisis-panel__icon {
+        width: 24px;
+        height: 24px;
+        font-size: 13px;
+        background: #77408C !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .fd-crisis-panel__title {
+        font-size: 11px;
+      }
+
+      .fd-crisis-panel__text {
+        display: none;
+      }
+
+      .fd-crisis-cards {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+
+      .fd-crisis-card {
+        min-height: 0;
+        padding: 8px;
+        border-radius: 10px;
+        box-shadow: none;
+        page-break-inside: avoid;
+      }
+
+      .fd-crisis-card::before {
+        height: 4px;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .fd-crisis-card__top {
+        margin-bottom: 6px;
+      }
+
+      .fd-crisis-card__title {
+        font-size: 10.5px;
+      }
+
+      .fd-crisis-status {
+        padding: 4px 5px;
+        font-size: 8px;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .fd-crisis-values {
+        gap: 5px;
+        margin-bottom: 5px;
+      }
+
+      .fd-crisis-value-box {
+        min-height: 44px;
+        padding: 6px;
+        border-radius: 8px;
+        background: #F8F3FA !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .fd-crisis-value-box__label {
+        font-size: 7px;
+      }
+
+      .fd-crisis-value-box__value {
+        font-size: 10px;
+      }
+
+      .fd-crisis-card__row {
+        margin-top: 5px;
+        padding-top: 5px;
+      }
+
+      .fd-crisis-card__label {
+        font-size: 7px;
+      }
+
+      .fd-crisis-card__text {
+        font-size: 8.2px;
+        line-height: 1.18;
+      }
+
+      .fd-crisis-note {
+        margin: 0 10px 10px;
+        padding: 8px 10px;
+        font-size: 9px;
+        border-radius: 8px;
+      }
+    }
+  </style>
+
+  <div class="fd-crisis-dashboard__inner">
+    <p class="fd-crisis-print-title">
+      Кризис-панель собственника: сигнальные показатели для контроля результата года
+    </p>
+
+    <header class="fd-crisis-header">
+      <div class="fd-crisis-header__left">
+        <h2 class="fd-crisis-title">Кризис-панель собственника</h2>
+        <p class="fd-crisis-subtitle">
+          12 индикаторов, которые покажут риски до того, как они попадут в отчетность
+        </p>
+      </div>
+
+      <div class="fd-crisis-header__right">
+        <div class="fd-crisis-legend" aria-label="Легенда статусов">
+          <span class="fd-crisis-legend__item">
+            <span class="fd-crisis-legend__dot fd-crisis-legend__dot--green"></span>
+            В норме
+          </span>
+          <span class="fd-crisis-legend__item">
+            <span class="fd-crisis-legend__dot fd-crisis-legend__dot--yellow"></span>
+            Зона внимания
+          </span>
+          <span class="fd-crisis-legend__item">
+            <span class="fd-crisis-legend__dot fd-crisis-legend__dot--red"></span>
+            Требует решения
+          </span>
+        </div>
+
+        <button class="fd-crisis-print-button" type="button">
+          Скачать PDF
+        </button>
+      </div>
+    </header>
+
+    <nav class="fd-crisis-tabs" aria-label="Разделы дашборда">
+      <button class="fd-crisis-tab fd-crisis-tab--active" type="button" data-fd-crisis-tab="demand">
+        Спрос
+      </button>
+      <button class="fd-crisis-tab" type="button" data-fd-crisis-tab="demand-quality">
+        Качество спроса
+      </button>
+      <button class="fd-crisis-tab" type="button" data-fd-crisis-tab="execution">
+        Исполнение
+      </button>
+      <button class="fd-crisis-tab" type="button" data-fd-crisis-tab="service">
+        Качество и сервис
+      </button>
+    </nav>
+
+    <div class="fd-crisis-panels">
+      <section class="fd-crisis-panel fd-crisis-panel--active" data-fd-crisis-panel="demand">
+        <div class="fd-crisis-panel__head">
+          <span class="fd-crisis-panel__icon" aria-hidden="true">↗</span>
+          <div>
+            <h3 class="fd-crisis-panel__title">Спрос и будущая выручка</h3>
+            <p class="fd-crisis-panel__text">Показывает, будет ли у компании поток продаж до конца года.</p>
+          </div>
+        </div>
+
+        <div class="fd-crisis-cards">
+          <article class="fd-crisis-card fd-crisis-card--yellow">
+            <div class="fd-crisis-card__top">
+              <h4 class="fd-crisis-card__title">Количество заявок / заказов</h4>
+              <span class="fd-crisis-status"><span class="fd-crisis-status__dot"></span>Желтый</span>
+            </div>
+            <div class="fd-crisis-values">
+              <div class="fd-crisis-value-box">
+                <span class="fd-crisis-value-box__label">Текущее значение</span>
+                <span class="fd-crisis-value-box__value">–12% к прошлому месяцу</span>
+              </div>
+              <div class="fd-crisis-value-box">
+                <span class="fd-crisis-value-box__label">Порог риска</span>
+                <span class="fd-crisis-value-box__value">–15% два месяца подряд</span>
+              </div>
+            </div>
+            <div class="fd-crisis-card__row">
+              <span class="fd-crisis-card__label">О чем сигнализирует</span>
+              <p class="fd-crisis-card__text">Через 1–2 месяца может просесть поток новых продаж.</p>
+            </div>
+            <div class="fd-crisis-card__row">
+              <span class="fd-crisis-card__label">Что делать</span>
+              <p class="fd-crisis-card__text">Проверить каналы продаж и пересчитать прогноз выручки.</p>
+            </div>
+          </article>
+
+          <article class="fd-crisis-card fd-crisis-card--red">
+            <div class="fd-crisis-card__top">
+              <h4 class="fd-crisis-card__title">Конверсия в сделку</h4>
+              <span class="fd-crisis-status"><span class="fd-crisis-status__dot"></span>Красный</span>
+            </div>
+            <div class="fd-crisis-values">
+              <div class="fd-crisis-value-box">
+                <span class="fd-crisis-value-box__label">Текущее значение</span>
+                <span class="fd-crisis-value-box__value">18% при норме 25%</span>
+              </div>
+              <div class="fd-crisis-value-box">
+                <span class="fd-crisis-value-box__label">Порог риска</span>
+                <span class="fd-crisis-value-box__value">ниже 20%</span>
+              </div>
+            </div>
+            <div class="fd-crisis-card__row">
+              <span class="fd-crisis-card__label">О чем сигнализирует</span>
+              <p class="fd-crisis-card__text">Клиенты хуже проходят воронку, будущая выручка под риском.</p>
+            </div>
+            <div class="fd-crisis-card__row">
+              <span class="fd-crisis-card__label">Что делать</span>
+              <p class="fd-crisis-card__text">Разобрать причины отказов, цену и условия сделок.</p>
+            </div>
+          </article>
+
+          <article class="fd-crisis-card fd-crisis-card--red">
+            <div class="fd-crisis-card__top">
+              <h4 class="fd-crisis-card__title">Уровень контрактации</h4>
+              <span class="fd-crisis-status"><span class="fd-crisis-status__dot"></span>Красный</span>
+            </div>
+            <div class="fd-crisis-values">
+              <div class="fd-crisis-value-box">
+                <span class="fd-crisis-value-box__label">Текущее значение</span>
+                <span class="fd-crisis-value-box__value">68% плана на 30 июня</span>
+              </div>
+              <div class="fd-crisis-value-box">
+                <span class="fd-crisis-value-box__label">Порог риска</span>
+                <span class="fd-crisis-value-box__value">ниже 80% к контрольной дате</span>
+              </div>
+            </div>
+            <div class="fd-crisis-card__row">
+              <span class="fd-crisis-card__label">О чем сигнализирует</span>
+              <p class="fd-crisis-card__text">Часть годовой выручки физически не успеет попасть в текущий год.</p>
+            </div>
+            <div class="fd-crisis-card__row">
+              <span class="fd-crisis-card__label">Что делать</span>
+              <p class="fd-crisis-card__text">Пересчитать БДР и показать собственнику недостижимую часть плана.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="fd-crisis-panel" data-fd-crisis-panel="demand-quality">
+        <div class="fd-crisis-panel__head">
+          <span class="fd-crisis-panel__icon" aria-hidden="true">%</span>
+          <div>
+            <h3 class="fd-crisis-panel__title">Качество спроса</h3>
+            <p class="fd-crisis-panel__text">Показывает, не покупает ли бизнес выручку слишком дорогой ценой.</p>
+          </div>
+        </div>
+
+        <div class="fd-crisis-cards">
+          <article class="fd-crisis-card fd-crisis-card--yellow">
+            <div class="fd-crisis-card__top">
+              <h4 class="fd-crisis-card__title">Доля продаж со скидками</h4>
+              <span class="fd-crisis-status"><span class="fd-crisis-status__dot"></span>Желтый</span>
+            </div>
+            <div class="fd-crisis-values">
+              <div class="fd-crisis-value-box">
+                <span class="fd-crisis-value-box__label">Текущее значение</span>
+                <span class="fd-crisis-value-box__value">42% сделок</span>
+              </div>
+              <div class="fd-crisis-value-box">
+                <span class="fd-crisis-value-box__label">Порог риска</span>
+                <span class="fd-crisis-value-box__value">выше 45%</span>
+              </div>
+            </div>
+            <div class="fd-crisis-card__row">
+              <span class="fd-crisis-card__label">О чем сигнализирует</span>
+              <p class="fd-crisis-card__text">План продаж все чаще выполняется за счет уступок.</p>
+            </div>
+            <div class="fd-crisis-card__row">
+              <span class="fd-crisis-card__label">Что делать</span>
+              <p class="fd-crisis-card__text">Проверить правила скидок и мотивацию продаж.</p>
+            </div>
+          </article>
+
+          <article class="fd-crisis-card fd-crisis-card--red">
+            <div class="fd-crisis-card__top">
+              <h4 class="fd-crisis-card__title">Средняя глубина скидки</h4>
+              <span class="fd-crisis-status"><span class="fd-crisis-status__dot"></span>Красный</span>
+            </div>
+            <div class="fd-crisis-values">
+              <div class="fd-crisis-value-box">
+                <span class="fd-crisis-value-box__label">Текущее значение</span>
+                <span class="fd-crisis-value-box__value">17% при норме 10%</span>
+              </div>
+              <div class="fd-crisis-value-box">
+                <span class="fd-crisis-value-box__label">Порог риска</span>
+                <span class="fd-crisis-value-box__value">выше 15%</span>
+              </div>
+            </div>
+            <div class="fd-crisis-card__row">
+              <span class="fd-crisis-card__label">О чем сигнализирует</span>
+              <p class="fd-crisis-card__text">Компания покупает выручку за счет маржи.</p>
+            </div>
+            <div class="fd-crisis-card__row">
+              <span class="fd-crisis-card__label">Что делать</span>
+              <p class="fd-crisis-card__text">Ввести согласование крупных скидок с CFO.</p>
+            </div>
+          </article>
+
+          <article class="fd-crisis-card fd-crisis-card--yellow">
+            <div class="fd-crisis-card__top">
+              <h4 class="fd-crisis-card__title">Стоимость привлечения клиента</h4>
+              <span class="fd-crisis-status"><span class="fd-crisis-status__dot"></span>Желтый</span>
+            </div>
+            <div class="fd-crisis-values">
+              <div class="fd-crisis-value-box">
+                <span class="fd-crisis-value-box__label">Текущее значение</span>
+                <span class="fd-crisis-value-box__value">окупаемость 11 месяцев</span>
+              </div>
+              <div class="fd-crisis-value-box">
+                <span class="fd-crisis-value-box__label">Порог риска</span>
+                <span class="fd-crisis-value-box__value">выше 12 месяцев</span>
+              </div>
+            </div>
+            <div class="fd-crisis-card__row">
+              <span class="fd-crisis-card__label">О чем сигнализирует</span>
+              <p class="fd-crisis-card__text">Новый клиент становится дорогим до первой нормальной выручки.</p>
+            </div>
+            <div class="fd-crisis-card__row">
+              <span class="fd-crisis-card__label">Что делать</span>
+              <p class="fd-crisis-card__text">Проверить бесплатные периоды, интеграции и сервисные условия.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="fd-crisis-panel" data-fd-crisis-panel="execution">
+        <div class="fd-crisis-panel__head">
+          <span class="fd-crisis-panel__icon" aria-hidden="true">⚙</span>
+          <div>
+            <h3 class="fd-crisis-panel__title">Исполнение и операционный цикл</h3>
+            <p class="fd-crisis-panel__text">Показывает, что компания физически уже не успеет выполнить до конца года.</p>
+          </div>
+        </div>
+
+        <div class="fd-crisis-cards">
+          <article class="fd-crisis-card fd-crisis-card--red">
+            <div class="fd-crisis-card__top">
+              <h4 class="fd-crisis-card__title">Выполнение ключевых этапов проекта</h4>
+              <span class="fd-crisis-status"><span class="fd-crisis-status__dot"></span>Красный</span>
+            </div>
+            <div class="fd-crisis-values">
+              <div class="fd-crisis-value-box">
+                <span class="fd-crisis-value-box__label">Текущее значение</span>
+                <span class="fd-crisis-value-box__value">2 этапа сорваны</span>
+              </div>
+              <div class="fd-crisis-value-box">
+                <span class="fd-crisis-value-box__label">Порог риска</span>
+                <span class="fd-crisis-value-box__value">срыв критичного этапа</span>
+              </div>
+            </div>
+            <div class="fd-crisis-card__row">
+              <span class="fd-crisis-card__label">О чем сигнализирует</span>
+              <p class="fd-crisis-card__text">Срок проекта может уйти за пределы года.</p>
+            </div>
+            <div class="fd-crisis-card__row">
+              <span class="fd-crisis-card__label">Что делать</span>
+              <p class="fd-crisis-card__text">Пересчитать сроки, ресурсы и финансовый результат.</p>
+            </div>
+          </article>
+
+          <article class="fd-crisis-card fd-crisis-card--yellow">
+            <div class="fd-crisis-card__top">
+              <h4 class="fd-crisis-card__title">Загрузка мощностей</h4>
+              <span class="fd-crisis-status"><span class="fd-crisis-status__dot"></span>Желтый</span>
+            </div>
+            <div class="fd-crisis-values">
+              <div class="fd-crisis-value-box">
+                <span class="fd-crisis-value-box__label">Текущее значение</span>
+                <span class="fd-crisis-value-box__value">91%</span>
+              </div>
+              <div class="fd-crisis-value-box">
+                <span class="fd-crisis-value-box__label">Порог риска</span>
+                <span class="fd-crisis-value-box__value">выше 95%</span>
+              </div>
+            </div>
+            <div class="fd-crisis-card__row">
+              <span class="fd-crisis-card__label">О чем сигнализирует</span>
+              <p class="fd-crisis-card__text">Новые заказы могут создать очереди, переработки и срывы сроков.</p>
+            </div>
+            <div class="fd-crisis-card__row">
+              <span class="fd-crisis-card__label">Что делать</span>
+              <p class="fd-crisis-card__text">Приоритизировать заказы и оценить ресурсное усиление.</p>
+            </div>
+          </article>
+
+          <article class="fd-crisis-card fd-crisis-card--red">
+            <div class="fd-crisis-card__top">
+              <h4 class="fd-crisis-card__title">Закрытость критичных функций</h4>
+              <span class="fd-crisis-status"><span class="fd-crisis-status__dot"></span>Красный</span>
+            </div>
+            <div class="fd-crisis-values">
+              <div class="fd-crisis-value-box">
+                <span class="fd-crisis-value-box__label">Текущее значение</span>
+                <span class="fd-crisis-value-box__value">2 функции не закрыты</span>
+              </div>
+              <div class="fd-crisis-value-box">
+                <span class="fd-crisis-value-box__label">Порог риска</span>
+                <span class="fd-crisis-value-box__value">не закрыта хотя бы 1 функция</span>
+              </div>
+            </div>
+            <div class="fd-crisis-card__row">
+              <span class="fd-crisis-card__label">О чем сигнализирует</span>
+              <p class="fd-crisis-card__text">Команда может продать больше, чем способна выполнить.</p>
+            </div>
+            <div class="fd-crisis-card__row">
+              <span class="fd-crisis-card__label">Что делать</span>
+              <p class="fd-crisis-card__text">Привлечь подрядчика, закрыть вакансию или изменить график проекта.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="fd-crisis-panel" data-fd-crisis-panel="service">
+        <div class="fd-crisis-panel__head">
+          <span class="fd-crisis-panel__icon" aria-hidden="true">✓</span>
+          <div>
+            <h3 class="fd-crisis-panel__title">Качество и сервис</h3>
+            <p class="fd-crisis-panel__text">Показывает, какие операционные сбои позже ударят по продажам.</p>
+          </div>
+        </div>
+
+        <div class="fd-crisis-cards">
+          <article class="fd-crisis-card fd-crisis-card--yellow">
+            <div class="fd-crisis-card__top">
+              <h4 class="fd-crisis-card__title">Рекламации</h4>
+              <span class="fd-crisis-status"><span class="fd-crisis-status__dot"></span>Желтый</span>
+            </div>
+            <div class="fd-crisis-values">
+              <div class="fd-crisis-value-box">
+                <span class="fd-crisis-value-box__label">Текущее значение</span>
+                <span class="fd-crisis-value-box__value">+28% за месяц</span>
+              </div>
+              <div class="fd-crisis-value-box">
+                <span class="fd-crisis-value-box__label">Порог риска</span>
+                <span class="fd-crisis-value-box__value">рост более 30%</span>
+              </div>
+            </div>
+            <div class="fd-crisis-card__row">
+              <span class="fd-crisis-card__label">О чем сигнализирует</span>
+              <p class="fd-crisis-card__text">Качество начинает угрожать повторным продажам.</p>
+            </div>
+            <div class="fd-crisis-card__row">
+              <span class="fd-crisis-card__label">Что делать</span>
+              <p class="fd-crisis-card__text">Разобрать причины по продукту, филиалу или команде.</p>
+            </div>
+          </article>
+
+          <article class="fd-crisis-card fd-crisis-card--red">
+            <div class="fd-crisis-card__top">
+              <h4 class="fd-crisis-card__title">Повторные жалобы</h4>
+              <span class="fd-crisis-status"><span class="fd-crisis-status__dot"></span>Красный</span>
+            </div>
+            <div class="fd-crisis-values">
+              <div class="fd-crisis-value-box">
+                <span class="fd-crisis-value-box__label">Текущее значение</span>
+                <span class="fd-crisis-value-box__value">14% обращений</span>
+              </div>
+              <div class="fd-crisis-value-box">
+                <span class="fd-crisis-value-box__label">Порог риска</span>
+                <span class="fd-crisis-value-box__value">выше 10%</span>
+              </div>
+            </div>
+            <div class="fd-crisis-card__row">
+              <span class="fd-crisis-card__label">О чем сигнализирует</span>
+              <p class="fd-crisis-card__text">Проблема клиента не решается с первого раза.</p>
+            </div>
+            <div class="fd-crisis-card__row">
+              <span class="fd-crisis-card__label">Что делать</span>
+              <p class="fd-crisis-card__text">Изменить процесс обслуживания и усилить контроль сервиса.</p>
+            </div>
+          </article>
+
+          <article class="fd-crisis-card fd-crisis-card--red">
+            <div class="fd-crisis-card__top">
+              <h4 class="fd-crisis-card__title">Срывы сроков поставки / работ</h4>
+              <span class="fd-crisis-status"><span class="fd-crisis-status__dot"></span>Красный</span>
+            </div>
+            <div class="fd-crisis-values">
+              <div class="fd-crisis-value-box">
+                <span class="fd-crisis-value-box__label">Текущее значение</span>
+                <span class="fd-crisis-value-box__value">19% заказов</span>
+              </div>
+              <div class="fd-crisis-value-box">
+                <span class="fd-crisis-value-box__label">Порог риска</span>
+                <span class="fd-crisis-value-box__value">выше 15%</span>
+              </div>
+            </div>
+            <div class="fd-crisis-card__row">
+              <span class="fd-crisis-card__label">О чем сигнализирует</span>
+              <p class="fd-crisis-card__text">Растет риск штрафов, скидок и ухода клиентов.</p>
+            </div>
+            <div class="fd-crisis-card__row">
+              <span class="fd-crisis-card__label">Что делать</span>
+              <p class="fd-crisis-card__text">Пересчитать график, предупредить клиентов и усилить ресурсы.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <p class="fd-crisis-note">
+      <strong>Правило кризис-панели:</strong> выводите собственнику красные показатели и желтые, которые приближаются к критической границе. Зеленые оставляйте в операционных дашбордах подразделений.
+    </p>
+  </div>
+
+  <script>
+    (function () {
+      var dashboards = document.querySelectorAll('.fd-crisis-dashboard');
+
+      dashboards.forEach(function (dashboard) {
+        var tabs = dashboard.querySelectorAll('.fd-crisis-tab');
+        var panels = dashboard.querySelectorAll('.fd-crisis-panel');
+        var printButton = dashboard.querySelector('.fd-crisis-print-button');
+
+        tabs.forEach(function (tab) {
+          tab.addEventListener('click', function () {
+            var target = tab.getAttribute('data-fd-crisis-tab');
+
+            tabs.forEach(function (item) {
+              item.classList.remove('fd-crisis-tab--active');
+            });
+
+            panels.forEach(function (panel) {
+              panel.classList.remove('fd-crisis-panel--active');
+            });
+
+            tab.classList.add('fd-crisis-tab--active');
+
+            var activePanel = dashboard.querySelector('[data-fd-crisis-panel="' + target + '"]');
+            if (activePanel) {
+              activePanel.classList.add('fd-crisis-panel--active');
+            }
+          });
+        });
+
+        if (printButton) {
+          printButton.addEventListener('click', function () {
+            window.print();
+          });
+        }
+      });
+    })();
+  </script>
+</section>
