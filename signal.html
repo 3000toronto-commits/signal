@@ -917,15 +917,15 @@
             Все индикаторы
           </button>
 
-          <button class="fd-crisis-filter__button fd-crisis-filter__button--active" type="button" data-fd-filter="green">
+          <button class="fd-crisis-filter__button" type="button" data-fd-filter="green">
             Зеленые
           </button>
 
-          <button class="fd-crisis-filter__button fd-crisis-filter__button--active" type="button" data-fd-filter="yellow">
+          <button class="fd-crisis-filter__button" type="button" data-fd-filter="yellow">
             Желтые
           </button>
 
-          <button class="fd-crisis-filter__button fd-crisis-filter__button--active" type="button" data-fd-filter="red">
+          <button class="fd-crisis-filter__button" type="button" data-fd-filter="red">
             Красные
           </button>
         </div>
@@ -1467,10 +1467,12 @@
       var resultArea = root.querySelector('[data-fd-result-area]');
 
       var selectedStatuses = {
-        green: true,
-        yellow: true,
-        red: true
-      };
+  green: false,
+  yellow: false,
+  red: false
+};
+
+var showAllStatuses = true;
 
       function panelHeadHtml(groupKey) {
         var group = groups[groupKey];
@@ -1617,43 +1619,41 @@
       }
 
       function updateFilterButtons() {
-        var allSelected = selectedStatuses.green && selectedStatuses.yellow && selectedStatuses.red;
+  root.querySelectorAll('[data-fd-filter]').forEach(function (button) {
+    var filter = button.getAttribute('data-fd-filter');
 
-        root.querySelectorAll('[data-fd-filter]').forEach(function (button) {
-          var filter = button.getAttribute('data-fd-filter');
+    if (filter === 'all') {
+      button.classList.toggle('fd-crisis-filter__button--active', showAllStatuses);
+      return;
+    }
 
-          if (filter === 'all') {
-            button.classList.toggle('fd-crisis-filter__button--active', allSelected);
-            return;
-          }
-
-          button.classList.toggle('fd-crisis-filter__button--active', !!selectedStatuses[filter]);
-        });
-      }
+    button.classList.toggle('fd-crisis-filter__button--active', !showAllStatuses && !!selectedStatuses[filter]);
+  });
+}
 
       function applyFilter() {
-        updateFilterButtons();
+  updateFilterButtons();
 
-        root.querySelectorAll('[data-fd-output-panel]').forEach(function (panel) {
-          var visibleCount = 0;
+  root.querySelectorAll('[data-fd-output-panel]').forEach(function (panel) {
+    var visibleCount = 0;
 
-          panel.querySelectorAll('.fd-crisis-output-card').forEach(function (card) {
-            var status = card.getAttribute('data-fd-status');
-            var show = !!selectedStatuses[status];
+    panel.querySelectorAll('.fd-crisis-output-card').forEach(function (card) {
+      var status = card.getAttribute('data-fd-status');
+      var show = showAllStatuses || !!selectedStatuses[status];
 
-            card.hidden = !show;
+      card.hidden = !show;
 
-            if (show) {
-              visibleCount += 1;
-            }
-          });
-
-          var empty = panel.querySelector('.fd-crisis-empty');
-          if (empty) {
-            empty.classList.toggle('fd-crisis-empty--visible', visibleCount === 0);
-          }
-        });
+      if (show) {
+        visibleCount += 1;
       }
+    });
+
+    var empty = panel.querySelector('.fd-crisis-empty');
+    if (empty) {
+      empty.classList.toggle('fd-crisis-empty--visible', visibleCount === 0);
+    }
+  });
+}
 
       function buildDashboard() {
         var calculated = indicators.map(calculateIndicator).filter(Boolean);
@@ -1736,22 +1736,37 @@
       });
 
       root.querySelectorAll('[data-fd-filter]').forEach(function (button) {
-        button.addEventListener('click', function () {
-          var filter = button.getAttribute('data-fd-filter');
+  button.addEventListener('click', function () {
+    var filter = button.getAttribute('data-fd-filter');
 
-          if (filter === 'all') {
-            selectedStatuses.green = true;
-            selectedStatuses.yellow = true;
-            selectedStatuses.red = true;
-            applyFilter();
-            return;
-          }
+    if (filter === 'all') {
+      showAllStatuses = true;
+      selectedStatuses.green = false;
+      selectedStatuses.yellow = false;
+      selectedStatuses.red = false;
+      applyFilter();
+      return;
+    }
 
-          selectedStatuses[filter] = !selectedStatuses[filter];
-          applyFilter();
-        });
-      });
+    if (showAllStatuses) {
+      showAllStatuses = false;
+      selectedStatuses.green = false;
+      selectedStatuses.yellow = false;
+      selectedStatuses.red = false;
+      selectedStatuses[filter] = true;
+      applyFilter();
+      return;
+    }
 
+    selectedStatuses[filter] = !selectedStatuses[filter];
+
+    if (!selectedStatuses.green && !selectedStatuses.yellow && !selectedStatuses.red) {
+      showAllStatuses = true;
+    }
+
+    applyFilter();
+  });
+});
       root.querySelector('[data-fd-ppt]').addEventListener('click', downloadPpt);
 
       root.querySelectorAll('[data-fd-print]').forEach(function (button) {
