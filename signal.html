@@ -11,12 +11,12 @@
       --fd-light: #EDE0F3;
       --fd-border: #D9C7E4;
       --fd-text: #2A2A2A;
-      --fd-muted: #666;
-      --fd-white: #fff;
+      --fd-muted: #666666;
+      --fd-bg: #FAF7FC;
+      --fd-white: #FFFFFF;
       --fd-green: #4C9F70;
       --fd-yellow: #F2B84B;
       --fd-red: #D9534F;
-      --fd-bg-soft: #FAF7FC;
 
       width: 100%;
       max-width: 1180px;
@@ -31,7 +31,7 @@
 
     .fd-crisis-dashboard__inner {
       overflow: hidden;
-      background: var(--fd-bg-soft);
+      background: var(--fd-bg);
       border: 1px solid var(--fd-border);
       border-radius: 18px;
     }
@@ -53,29 +53,19 @@
     }
 
     .fd-crisis-subtitle {
-      max-width: 720px;
+      max-width: 760px;
       margin: 0;
       font-size: 14px;
       line-height: 1.35;
-      opacity: 0.92;
+      opacity: 0.94;
     }
 
-    .fd-crisis-header__right {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 10px;
-      min-width: 220px;
-    }
-
-    .fd-crisis-print-button,
-    .fd-crisis-calc-button,
-    .fd-crisis-reset-button {
+    .fd-crisis-button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       min-height: 38px;
-      padding: 9px 15px;
+      padding: 9px 16px;
       font-size: 13px;
       font-weight: 700;
       border: 0;
@@ -83,77 +73,150 @@
       cursor: pointer;
     }
 
-    .fd-crisis-print-button {
+    .fd-crisis-button--primary {
+      color: #fff;
+      background: var(--fd-primary);
+    }
+
+    .fd-crisis-button--white {
       color: var(--fd-primary);
       background: #fff;
       box-shadow: 0 8px 18px rgba(0, 0, 0, 0.16);
     }
 
-    .fd-crisis-calc-button {
-      color: #fff;
-      background: var(--fd-primary);
-    }
-
-    .fd-crisis-reset-button {
+    .fd-crisis-button--ghost {
       color: var(--fd-primary);
       background: #fff;
       border: 1px solid var(--fd-border);
+      box-shadow: none;
     }
 
-    .fd-crisis-form {
+    .fd-crisis-input-area,
+    .fd-crisis-result-area {
       padding: 18px;
     }
 
-    .fd-crisis-form__intro {
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
+    .fd-crisis-result-area {
+      display: none;
+    }
+
+    .fd-crisis-result-area--visible {
+      display: block;
+    }
+
+    .fd-crisis-input-area--hidden {
+      display: none;
+    }
+
+    .fd-crisis-tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
       margin-bottom: 14px;
-      padding: 14px 16px;
+    }
+
+    .fd-crisis-tab {
+      min-height: 42px;
+      padding: 9px 12px;
+      color: var(--fd-primary);
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
       background: #fff;
       border: 1px solid var(--fd-border);
-      border-radius: 16px;
+      border-radius: 12px;
+      cursor: pointer;
     }
 
-    .fd-crisis-form__intro h3 {
-      margin: 0 0 4px;
-      color: var(--fd-primary-dark);
+    .fd-crisis-tab--active {
+      color: #fff;
+      background: var(--fd-primary);
+      border-color: var(--fd-primary);
+    }
+
+    .fd-crisis-input-panel,
+    .fd-crisis-output-panel {
+      display: none;
+    }
+
+    .fd-crisis-input-panel--active,
+    .fd-crisis-output-panel--active {
+      display: block;
+    }
+
+    .fd-crisis-panel-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      padding: 12px 14px;
+      background: var(--fd-light);
+      border: 1px solid var(--fd-border);
+      border-radius: 14px;
+    }
+
+    .fd-crisis-panel-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      color: #fff;
       font-size: 18px;
-      line-height: 1.2;
+      background: var(--fd-primary);
+      border-radius: 50%;
+      flex: 0 0 auto;
     }
 
-    .fd-crisis-form__intro p {
+    .fd-crisis-panel-title {
       margin: 0;
-      color: var(--fd-muted);
-      font-size: 13px;
-      line-height: 1.35;
+      color: var(--fd-primary-dark);
+      font-size: 17px;
+      line-height: 1.2;
+      font-weight: 700;
     }
 
-    .fd-crisis-form-grid {
+    .fd-crisis-panel-text {
+      margin: 3px 0 0;
+      color: var(--fd-muted);
+      font-size: 12px;
+      line-height: 1.3;
+    }
+
+    .fd-crisis-input-list {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 14px;
     }
 
-    .fd-crisis-input-group {
+    .fd-crisis-input-card {
       padding: 14px;
       background: #fff;
       border: 1px solid var(--fd-border);
       border-radius: 16px;
+      box-shadow: 0 8px 18px rgba(119, 64, 140, 0.08);
     }
 
-    .fd-crisis-input-group__title {
-      margin: 0 0 10px;
-      color: var(--fd-primary);
+    .fd-crisis-input-card__title {
+      margin: 0 0 6px;
+      color: var(--fd-primary-dark);
       font-size: 15px;
       line-height: 1.25;
       font-weight: 700;
+    }
+
+    .fd-crisis-input-card__hint {
+      margin: 0 0 10px;
+      color: var(--fd-muted);
+      font-size: 12px;
+      line-height: 1.35;
     }
 
     .fd-crisis-fields {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 8px;
+      margin-bottom: 10px;
     }
 
     .fd-crisis-field {
@@ -179,22 +242,31 @@
       border-radius: 10px;
     }
 
-    .fd-crisis-form-actions {
+    .fd-crisis-live-result {
+      min-height: 42px;
+      padding: 9px 10px;
+      color: var(--fd-primary-dark);
+      font-size: 12px;
+      line-height: 1.3;
+      background: #F8F3FA;
+      border: 1px solid var(--fd-border);
+      border-radius: 10px;
+    }
+
+    .fd-crisis-live-result strong {
+      font-size: 14px;
+    }
+
+    .fd-crisis-input-actions {
       display: flex;
+      flex-wrap: wrap;
       gap: 10px;
       margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--fd-border);
     }
 
-    .fd-crisis-results {
-      display: none;
-      padding: 0 18px 18px;
-    }
-
-    .fd-crisis-results--visible {
-      display: block;
-    }
-
-    .fd-crisis-controls {
+    .fd-crisis-result-controls {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -237,88 +309,15 @@
       border-color: var(--fd-primary);
     }
 
-    .fd-crisis-tabs {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-      margin-bottom: 14px;
-    }
-
-    .fd-crisis-tab {
-      min-height: 42px;
-      padding: 9px 12px;
-      color: var(--fd-primary);
-      font-size: 13px;
-      font-weight: 700;
-      text-align: center;
-      background: #fff;
-      border: 1px solid var(--fd-border);
-      border-radius: 12px;
-      cursor: pointer;
-    }
-
-    .fd-crisis-tab--active {
-      color: #fff;
-      background: var(--fd-primary);
-      border-color: var(--fd-primary);
-    }
-
-    .fd-crisis-panel {
-      display: none;
-    }
-
-    .fd-crisis-panel--active {
-      display: block;
-    }
-
-    .fd-crisis-panel__head {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 12px;
-      padding: 10px 12px;
-      background: var(--fd-light);
-      border: 1px solid var(--fd-border);
-      border-radius: 14px;
-    }
-
-    .fd-crisis-panel__icon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 34px;
-      height: 34px;
-      color: #fff;
-      font-size: 18px;
-      background: var(--fd-primary);
-      border-radius: 50%;
-      flex: 0 0 auto;
-    }
-
-    .fd-crisis-panel__title {
-      margin: 0;
-      color: var(--fd-primary-dark);
-      font-size: 17px;
-      line-height: 1.2;
-      font-weight: 700;
-    }
-
-    .fd-crisis-panel__text {
-      margin: 2px 0 0;
-      color: var(--fd-muted);
-      font-size: 12px;
-      line-height: 1.25;
-    }
-
-    .fd-crisis-cards {
+    .fd-crisis-output-cards {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 14px;
     }
 
-    .fd-crisis-card {
+    .fd-crisis-output-card {
       position: relative;
-      min-height: 265px;
+      min-height: 258px;
       padding: 14px;
       background: #fff;
       border: 1px solid var(--fd-border);
@@ -327,7 +326,7 @@
       overflow: hidden;
     }
 
-    .fd-crisis-card::before {
+    .fd-crisis-output-card::before {
       content: "";
       position: absolute;
       top: 0;
@@ -337,19 +336,19 @@
       background: var(--fd-green);
     }
 
-    .fd-crisis-card--green::before {
+    .fd-crisis-output-card--green::before {
       background: var(--fd-green);
     }
 
-    .fd-crisis-card--yellow::before {
+    .fd-crisis-output-card--yellow::before {
       background: var(--fd-yellow);
     }
 
-    .fd-crisis-card--red::before {
+    .fd-crisis-output-card--red::before {
       background: var(--fd-red);
     }
 
-    .fd-crisis-card__top {
+    .fd-crisis-output-card__top {
       display: flex;
       justify-content: space-between;
       gap: 10px;
@@ -357,7 +356,7 @@
       padding-top: 4px;
     }
 
-    .fd-crisis-card__title {
+    .fd-crisis-output-card__title {
       margin: 0;
       font-size: 15px;
       line-height: 1.2;
@@ -376,12 +375,12 @@
       background: var(--fd-green);
     }
 
-    .fd-crisis-card--yellow .fd-crisis-status {
+    .fd-crisis-output-card--yellow .fd-crisis-status {
       color: #4b3300;
       background: var(--fd-yellow);
     }
 
-    .fd-crisis-card--red .fd-crisis-status {
+    .fd-crisis-output-card--red .fd-crisis-status {
       color: #fff;
       background: var(--fd-red);
     }
@@ -419,13 +418,13 @@
       font-weight: 700;
     }
 
-    .fd-crisis-card__row {
+    .fd-crisis-output-card__row {
       margin-top: 10px;
       padding-top: 10px;
-      border-top: 1px solid #eee1f4;
+      border-top: 1px solid #EEE1F4;
     }
 
-    .fd-crisis-card__label {
+    .fd-crisis-output-card__label {
       display: block;
       margin-bottom: 3px;
       color: var(--fd-primary);
@@ -436,7 +435,7 @@
       letter-spacing: 0.03em;
     }
 
-    .fd-crisis-card__text {
+    .fd-crisis-output-card__text {
       margin: 0;
       color: var(--fd-text);
       font-size: 12.5px;
@@ -471,31 +470,22 @@
 
     @media (max-width: 900px) {
       .fd-crisis-header,
-      .fd-crisis-form__intro,
-      .fd-crisis-controls {
+      .fd-crisis-result-controls {
         flex-direction: column;
         align-items: flex-start;
-      }
-
-      .fd-crisis-header__right {
-        align-items: flex-start;
-        min-width: 0;
-      }
-
-      .fd-crisis-form-grid {
-        grid-template-columns: 1fr;
       }
 
       .fd-crisis-tabs {
         grid-template-columns: repeat(2, 1fr);
       }
 
-      .fd-crisis-cards {
+      .fd-crisis-input-list,
+      .fd-crisis-output-cards {
         grid-template-columns: 1fr;
       }
     }
 
-    @media (max-width: 520px) {
+    @media (max-width: 540px) {
       .fd-crisis-dashboard {
         padding: 10px;
         border-radius: 16px;
@@ -509,21 +499,21 @@
         font-size: 23px;
       }
 
+      .fd-crisis-input-area,
+      .fd-crisis-result-area {
+        padding: 12px;
+      }
+
       .fd-crisis-tabs,
       .fd-crisis-fields,
       .fd-crisis-values {
         grid-template-columns: 1fr;
       }
-
-      .fd-crisis-results,
-      .fd-crisis-form {
-        padding: 12px;
-      }
     }
 
     @media print {
       @page {
-        size: A4 landscape;
+        size: A4 portrait;
         margin: 1cm;
       }
 
@@ -552,79 +542,88 @@
       .fd-crisis-dashboard__inner {
         border: 0;
         border-radius: 0;
+        background: #fff;
+      }
+
+      .fd-crisis-input-area,
+      .fd-crisis-result-controls,
+      .fd-crisis-output-tabs,
+      .fd-crisis-header .fd-crisis-button {
+        display: none !important;
       }
 
       .fd-crisis-header {
-        padding: 14px 16px;
+        display: block;
+        padding: 14px 0 12px;
+        color: #fff;
         background: #77408C !important;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
       }
 
       .fd-crisis-title {
-        font-size: 22px;
+        margin-left: 12px;
+        font-size: 20px;
       }
 
       .fd-crisis-subtitle {
-        font-size: 11px;
+        margin-left: 12px;
+        font-size: 10.5px;
       }
 
-      .fd-crisis-form,
-      .fd-crisis-controls,
-      .fd-crisis-tabs,
-      .fd-crisis-print-button {
-        display: none !important;
-      }
-
-      .fd-crisis-results {
+      .fd-crisis-result-area {
         display: block !important;
         padding: 12px 0 0;
       }
 
-      .fd-crisis-panel {
+      .fd-crisis-output-panel {
         display: block !important;
-        page-break-inside: avoid;
+        width: 100%;
         margin-bottom: 14px;
+        page-break-inside: avoid;
       }
 
-      .fd-crisis-panel__head {
-        margin-bottom: 8px;
-        padding: 8px 10px;
+      .fd-crisis-panel-head {
+        margin: 0 0 8px;
+        padding: 9px 10px;
+        border-radius: 0;
         background: #EDE0F3 !important;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
       }
 
-      .fd-crisis-panel__icon {
+      .fd-crisis-panel-icon {
         background: #77408C !important;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
       }
 
-      .fd-crisis-cards {
-        grid-template-columns: repeat(3, 1fr);
+      .fd-crisis-output-cards {
+        grid-template-columns: repeat(2, 1fr);
         gap: 8px;
+        width: 100%;
       }
 
-      .fd-crisis-card {
+      .fd-crisis-output-card {
         min-height: 0;
         padding: 9px;
+        border-radius: 10px;
         box-shadow: none;
         page-break-inside: avoid;
       }
 
-      .fd-crisis-card[hidden] {
+      .fd-crisis-output-card[hidden] {
         display: none !important;
       }
 
-      .fd-crisis-card::before,
+      .fd-crisis-output-card::before,
       .fd-crisis-status,
       .fd-crisis-value-box {
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
       }
 
-      .fd-crisis-card__title {
+      .fd-crisis-output-card__title {
         font-size: 11px;
       }
 
@@ -645,17 +644,19 @@
         font-size: 10px;
       }
 
-      .fd-crisis-card__label {
+      .fd-crisis-output-card__label {
         font-size: 7px;
       }
 
-      .fd-crisis-card__text {
+      .fd-crisis-output-card__text {
         font-size: 8.5px;
-        line-height: 1.18;
+        line-height: 1.2;
       }
 
       .fd-crisis-note {
+        margin: 8px 0 0;
         font-size: 9px;
+        border-radius: 0;
       }
     }
   </style>
@@ -665,149 +666,34 @@
       <div>
         <h2 class="fd-crisis-title">Кризис-панель собственника</h2>
         <p class="fd-crisis-subtitle">
-          Введите данные, рассчитайте индикаторы и отфильтруйте дашборд по статусам:
-          зеленые, желтые, красные или все.
+          Введите исходные данные по индикаторам. После расчета сформируйте дашборд, отберите зеленые,
+          желтые или красные показатели и сохраните результат в PDF.
         </p>
       </div>
-
-      <div class="fd-crisis-header__right">
-        <button class="fd-crisis-print-button" type="button">Скачать PDF</button>
-      </div>
+      <button class="fd-crisis-button fd-crisis-button--white" type="button" data-fd-print>Скачать PDF</button>
     </header>
 
-    <form class="fd-crisis-form">
-      <div class="fd-crisis-form__intro">
-        <div>
-          <h3>Введите данные для расчета</h3>
-          <p>
-            Для расчетных показателей заполните исходные значения. После нажатия на кнопку
-            «Расчет» ниже появятся четыре дашборда.
-          </p>
-        </div>
+    <section class="fd-crisis-input-area" data-fd-input-area>
+      <nav class="fd-crisis-tabs" data-fd-input-tabs aria-label="Вкладки для ввода данных"></nav>
+      <div data-fd-input-panels></div>
+
+      <div class="fd-crisis-input-actions">
+        <button class="fd-crisis-button fd-crisis-button--primary" type="button" data-fd-build>
+          Сформировать дашборд
+        </button>
+        <button class="fd-crisis-button fd-crisis-button--ghost" type="button" data-fd-clear>
+          Очистить поля
+        </button>
       </div>
 
-      <div class="fd-crisis-form-grid">
-        <section class="fd-crisis-input-group">
-          <h4 class="fd-crisis-input-group__title">1. Спрос и будущая выручка</h4>
-          <div class="fd-crisis-fields">
-            <div class="fd-crisis-field">
-              <label for="fd-orders-current">Заказы за месяц, шт.</label>
-              <input id="fd-orders-current" name="ordersCurrent" type="number" value="880">
-            </div>
-            <div class="fd-crisis-field">
-              <label for="fd-orders-prev">Заказы месяц назад, шт.</label>
-              <input id="fd-orders-prev" name="ordersPrev" type="number" value="1000">
-            </div>
-            <div class="fd-crisis-field">
-              <label for="fd-leads">Заявки, шт.</label>
-              <input id="fd-leads" name="leads" type="number" value="1200">
-            </div>
-            <div class="fd-crisis-field">
-              <label for="fd-deals">Сделки, шт.</label>
-              <input id="fd-deals" name="deals" type="number" value="216">
-            </div>
-            <div class="fd-crisis-field">
-              <label for="fd-contracts-signed">Подписано договоров, млн руб.</label>
-              <input id="fd-contracts-signed" name="contractsSigned" type="number" value="680">
-            </div>
-            <div class="fd-crisis-field">
-              <label for="fd-contracts-plan">План контрактации, млн руб.</label>
-              <input id="fd-contracts-plan" name="contractsPlan" type="number" value="1000">
-            </div>
-          </div>
-        </section>
+      <p class="fd-crisis-note">
+        Заполните только те индикаторы, которые подходят вашему бизнесу. В дашборд попадут показатели,
+        по которым есть полный набор исходных данных.
+      </p>
+    </section>
 
-        <section class="fd-crisis-input-group">
-          <h4 class="fd-crisis-input-group__title">2. Качество спроса</h4>
-          <div class="fd-crisis-fields">
-            <div class="fd-crisis-field">
-              <label for="fd-discount-deals">Сделки со скидкой, шт.</label>
-              <input id="fd-discount-deals" name="discountDeals" type="number" value="91">
-            </div>
-            <div class="fd-crisis-field">
-              <label for="fd-total-deals">Всего сделок, шт.</label>
-              <input id="fd-total-deals" name="totalDeals" type="number" value="216">
-            </div>
-            <div class="fd-crisis-field">
-              <label for="fd-price-before">Цена до скидок, млн руб.</label>
-              <input id="fd-price-before" name="priceBefore" type="number" value="120">
-            </div>
-            <div class="fd-crisis-field">
-              <label for="fd-discount-sum">Сумма скидок, млн руб.</label>
-              <input id="fd-discount-sum" name="discountSum" type="number" value="20.4">
-            </div>
-            <div class="fd-crisis-field">
-              <label for="fd-acquisition-cost">Затраты на привлечение, тыс. руб.</label>
-              <input id="fd-acquisition-cost" name="acquisitionCost" type="number" value="550">
-            </div>
-            <div class="fd-crisis-field">
-              <label for="fd-monthly-margin">Валовая прибыль клиента в месяц, тыс. руб.</label>
-              <input id="fd-monthly-margin" name="monthlyMargin" type="number" value="50">
-            </div>
-          </div>
-        </section>
-
-        <section class="fd-crisis-input-group">
-          <h4 class="fd-crisis-input-group__title">3. Исполнение и операционный цикл</h4>
-          <div class="fd-crisis-fields">
-            <div class="fd-crisis-field">
-              <label for="fd-critical-delays">Сорвано критичных этапов, шт.</label>
-              <input id="fd-critical-delays" name="criticalDelays" type="number" value="2">
-            </div>
-            <div class="fd-crisis-field">
-              <label for="fd-current-load">Текущая загрузка, ед.</label>
-              <input id="fd-current-load" name="currentLoad" type="number" value="91">
-            </div>
-            <div class="fd-crisis-field">
-              <label for="fd-max-capacity">Максимальная мощность, ед.</label>
-              <input id="fd-max-capacity" name="maxCapacity" type="number" value="100">
-            </div>
-            <div class="fd-crisis-field">
-              <label for="fd-open-functions">Не закрыто критичных функций, шт.</label>
-              <input id="fd-open-functions" name="openFunctions" type="number" value="2">
-            </div>
-          </div>
-        </section>
-
-        <section class="fd-crisis-input-group">
-          <h4 class="fd-crisis-input-group__title">4. Качество и сервис</h4>
-          <div class="fd-crisis-fields">
-            <div class="fd-crisis-field">
-              <label for="fd-claims-current">Рекламации за месяц, шт.</label>
-              <input id="fd-claims-current" name="claimsCurrent" type="number" value="64">
-            </div>
-            <div class="fd-crisis-field">
-              <label for="fd-claims-prev">Рекламации месяц назад, шт.</label>
-              <input id="fd-claims-prev" name="claimsPrev" type="number" value="50">
-            </div>
-            <div class="fd-crisis-field">
-              <label for="fd-repeat-claims">Повторные жалобы, шт.</label>
-              <input id="fd-repeat-claims" name="repeatClaims" type="number" value="28">
-            </div>
-            <div class="fd-crisis-field">
-              <label for="fd-total-claims">Всего обращений, шт.</label>
-              <input id="fd-total-claims" name="totalClaims" type="number" value="200">
-            </div>
-            <div class="fd-crisis-field">
-              <label for="fd-delayed-orders">Заказы с нарушением срока, шт.</label>
-              <input id="fd-delayed-orders" name="delayedOrders" type="number" value="38">
-            </div>
-            <div class="fd-crisis-field">
-              <label for="fd-all-orders">Всего заказов, шт.</label>
-              <input id="fd-all-orders" name="allOrders" type="number" value="200">
-            </div>
-          </div>
-        </section>
-      </div>
-
-      <div class="fd-crisis-form-actions">
-        <button class="fd-crisis-calc-button" type="submit">Расчет</button>
-        <button class="fd-crisis-reset-button" type="button">Вернуть пример</button>
-      </div>
-    </form>
-
-    <section class="fd-crisis-results" aria-live="polite">
-      <div class="fd-crisis-controls">
+    <section class="fd-crisis-result-area" data-fd-result-area aria-live="polite">
+      <div class="fd-crisis-result-controls">
         <div class="fd-crisis-filter" aria-label="Фильтр показателей">
           <span class="fd-crisis-filter__label">Показать:</span>
           <button class="fd-crisis-filter__button fd-crisis-filter__button--active" type="button" data-fd-filter="all">Все</button>
@@ -815,17 +701,19 @@
           <button class="fd-crisis-filter__button" type="button" data-fd-filter="yellow">Желтые</button>
           <button class="fd-crisis-filter__button" type="button" data-fd-filter="red">Красные</button>
         </div>
-        <button class="fd-crisis-print-button" type="button">Скачать PDF</button>
+
+        <div class="fd-crisis-input-actions" style="margin:0;padding:0;border:0;">
+          <button class="fd-crisis-button fd-crisis-button--ghost" type="button" data-fd-back>
+            Вернуться к вводу
+          </button>
+          <button class="fd-crisis-button fd-crisis-button--primary" type="button" data-fd-print>
+            Скачать PDF
+          </button>
+        </div>
       </div>
 
-      <nav class="fd-crisis-tabs" aria-label="Разделы дашборда">
-        <button class="fd-crisis-tab fd-crisis-tab--active" type="button" data-fd-tab="demand">Спрос</button>
-        <button class="fd-crisis-tab" type="button" data-fd-tab="demandQuality">Качество спроса</button>
-        <button class="fd-crisis-tab" type="button" data-fd-tab="execution">Исполнение</button>
-        <button class="fd-crisis-tab" type="button" data-fd-tab="service">Качество и сервис</button>
-      </nav>
-
-      <div class="fd-crisis-panels"></div>
+      <nav class="fd-crisis-tabs fd-crisis-output-tabs" data-fd-output-tabs aria-label="Вкладки дашборда"></nav>
+      <div data-fd-output-panels></div>
 
       <p class="fd-crisis-note">
         <strong>Правило кризис-панели:</strong> выводите собственнику красные показатели и желтые,
@@ -836,75 +724,53 @@
 
   <script>
     (function () {
-      var dashboard = document.currentScript.closest('.fd-crisis-dashboard');
-      var form = dashboard.querySelector('.fd-crisis-form');
-      var results = dashboard.querySelector('.fd-crisis-results');
-      var panelsWrap = dashboard.querySelector('.fd-crisis-panels');
-      var resetButton = dashboard.querySelector('.fd-crisis-reset-button');
-      var printButtons = dashboard.querySelectorAll('.fd-crisis-print-button');
-      var currentFilter = 'all';
+      var root = document.currentScript.closest('.fd-crisis-dashboard');
 
-      var groupMeta = {
+      var groups = {
         demand: {
           title: 'Спрос и будущая выручка',
-          text: 'Показывает, будет ли у компании поток продаж до конца года.',
+          text: 'Индикаторы показывают, будет ли у компании поток продаж до конца года.',
           icon: '↗'
         },
         demandQuality: {
           title: 'Качество спроса',
-          text: 'Показывает, не покупает ли бизнес выручку слишком дорогой ценой.',
+          text: 'Индикаторы показывают, не покупает ли бизнес выручку слишком дорогой ценой.',
           icon: '%'
         },
         execution: {
           title: 'Исполнение и операционный цикл',
-          text: 'Показывает, что компания физически уже не успеет выполнить до конца года.',
+          text: 'Индикаторы показывают, какие проекты и заказы уже не успеют дать результат года.',
           icon: '⚙'
         },
         service: {
           title: 'Качество и сервис',
-          text: 'Показывает, какие операционные сбои позже ударят по продажам.',
+          text: 'Индикаторы показывают, какие сбои позже ударят по продажам.',
           icon: '✓'
         }
       };
 
-      var defaultValues = {
-        ordersCurrent: 880,
-        ordersPrev: 1000,
-        leads: 1200,
-        deals: 216,
-        contractsSigned: 680,
-        contractsPlan: 1000,
-        discountDeals: 91,
-        totalDeals: 216,
-        priceBefore: 120,
-        discountSum: 20.4,
-        acquisitionCost: 550,
-        monthlyMargin: 50,
-        criticalDelays: 2,
-        currentLoad: 91,
-        maxCapacity: 100,
-        openFunctions: 2,
-        claimsCurrent: 64,
-        claimsPrev: 50,
-        repeatClaims: 28,
-        totalClaims: 200,
-        delayedOrders: 38,
-        allOrders: 200
-      };
+      var groupOrder = ['demand', 'demandQuality', 'execution', 'service'];
 
-      function numberValue(formData, name) {
-        var value = Number(formData.get(name));
-        return isFinite(value) ? value : 0;
+      function highBad(value, yellow, red) {
+        if (value >= red) return 'red';
+        if (value >= yellow) return 'yellow';
+        return 'green';
       }
 
-      function percent(part, total) {
-        if (!total) return 0;
-        return (part / total) * 100;
+      function lowBad(value, yellow, red) {
+        if (value <= red) return 'red';
+        if (value <= yellow) return 'yellow';
+        return 'green';
       }
 
-      function changePercent(current, previous) {
-        if (!previous) return 0;
-        return ((current - previous) / previous) * 100;
+      function pct(part, total) {
+        if (!total) return null;
+        return part / total * 100;
+      }
+
+      function change(current, previous) {
+        if (!previous) return null;
+        return (current - previous) / previous * 100;
       }
 
       function round(value, digits) {
@@ -918,150 +784,614 @@
         return 'Красный';
       }
 
-      function statusByLowBad(value, yellowLimit, redLimit) {
-        if (value <= redLimit) return 'red';
-        if (value <= yellowLimit) return 'yellow';
-        return 'green';
+      function formatPercent(value) {
+        if (value === null || !isFinite(value)) return '—';
+        return (value > 0 ? '+' : '') + round(value, 1) + '%';
       }
 
-      function statusByHighBad(value, yellowLimit, redLimit) {
-        if (value >= redLimit) return 'red';
-        if (value >= yellowLimit) return 'yellow';
-        return 'green';
+      function n(values, key) {
+        return Number(values[key]);
       }
 
-      function buildIndicators(data) {
-        var ordersChange = changePercent(data.ordersCurrent, data.ordersPrev);
-        var conversion = percent(data.deals, data.leads);
-        var contractation = percent(data.contractsSigned, data.contractsPlan);
+      function allFilled(indicator) {
+        return indicator.fields.every(function (field) {
+          var input = root.querySelector('[name="' + indicator.id + '__' + field.name + '"]');
+          return input && input.value !== '';
+        });
+      }
 
-        var discountShare = percent(data.discountDeals, data.totalDeals);
-        var avgDiscount = percent(data.discountSum, data.priceBefore);
-        var payback = data.monthlyMargin ? data.acquisitionCost / data.monthlyMargin : 0;
-
-        var capacity = percent(data.currentLoad, data.maxCapacity);
-
-        var claimsGrowth = changePercent(data.claimsCurrent, data.claimsPrev);
-        var repeatClaimsShare = percent(data.repeatClaims, data.totalClaims);
-        var delayShare = percent(data.delayedOrders, data.allOrders);
-
-        return [
-          {
-            group: 'demand',
-            title: 'Количество заявок / заказов',
-            value: (ordersChange > 0 ? '+' : '') + round(ordersChange, 1) + '%',
-            threshold: 'желтый: –10%, красный: –15%',
-            status: ordersChange <= -15 ? 'red' : ordersChange <= -10 ? 'yellow' : 'green',
-            signal: 'Показывает, не проседает ли поток новых продаж.',
-            action: 'Проверить каналы продаж и пересчитать прогноз выручки.'
-          },
-          {
-            group: 'demand',
-            title: 'Конверсия в сделку',
-            value: round(conversion, 1) + '%',
-            threshold: 'желтый: ниже 25%, красный: ниже 20%',
-            status: statusByLowBad(conversion, 25, 20),
-            signal: 'Клиенты хуже проходят воронку, будущая выручка под риском.',
-            action: 'Разобрать причины отказов, цену и условия сделок.'
-          },
-          {
-            group: 'demand',
-            title: 'Уровень контрактации',
-            value: round(contractation, 1) + '% плана',
-            threshold: 'желтый: ниже 85%, красный: ниже 80%',
-            status: statusByLowBad(contractation, 85, 80),
-            signal: 'Часть годовой выручки может не попасть в текущий год.',
-            action: 'Пересчитать БДР и показать собственнику недостижимую часть плана.'
-          },
-          {
-            group: 'demandQuality',
-            title: 'Доля продаж со скидками',
-            value: round(discountShare, 1) + '% сделок',
-            threshold: 'желтый: выше 35%, красный: выше 45%',
-            status: statusByHighBad(discountShare, 35, 45),
-            signal: 'План продаж все чаще выполняется за счет уступок.',
-            action: 'Проверить правила скидок и мотивацию продаж.'
-          },
-          {
-            group: 'demandQuality',
-            title: 'Средняя глубина скидки',
-            value: round(avgDiscount, 1) + '%',
-            threshold: 'желтый: выше 10%, красный: выше 15%',
-            status: statusByHighBad(avgDiscount, 10, 15),
-            signal: 'Компания покупает выручку за счет маржи.',
-            action: 'Ввести согласование крупных скидок с CFO.'
-          },
-          {
-            group: 'demandQuality',
-            title: 'Окупаемость привлечения клиента',
-            value: round(payback, 1) + ' мес.',
-            threshold: 'желтый: выше 9 мес., красный: выше 12 мес.',
-            status: statusByHighBad(payback, 9, 12),
-            signal: 'Новый клиент становится дорогим до первой нормальной выручки.',
-            action: 'Проверить бесплатные периоды, интеграции и сервисные условия.'
-          },
-          {
-            group: 'execution',
-            title: 'Выполнение ключевых этапов проекта',
-            value: data.criticalDelays + ' сорвано',
-            threshold: 'желтый: 1 этап, красный: 2 и более',
-            status: data.criticalDelays >= 2 ? 'red' : data.criticalDelays >= 1 ? 'yellow' : 'green',
-            signal: 'Срок проекта может уйти за пределы года.',
-            action: 'Пересчитать сроки, ресурсы и финансовый результат.'
-          },
-          {
-            group: 'execution',
-            title: 'Загрузка мощностей',
-            value: round(capacity, 1) + '%',
-            threshold: 'желтый: выше 90%, красный: выше 95%',
-            status: statusByHighBad(capacity, 90, 95),
-            signal: 'Новые заказы могут создать очереди, переработки и срывы сроков.',
-            action: 'Приоритизировать заказы и оценить ресурсное усиление.'
-          },
-          {
-            group: 'execution',
-            title: 'Закрытость критичных функций',
-            value: data.openFunctions + ' не закрыто',
-            threshold: 'желтый: 1 функция, красный: 2 и более',
-            status: data.openFunctions >= 2 ? 'red' : data.openFunctions >= 1 ? 'yellow' : 'green',
-            signal: 'Команда может продать больше, чем способна выполнить.',
-            action: 'Привлечь подрядчика, закрыть вакансию или изменить график проекта.'
-          },
-          {
-            group: 'service',
-            title: 'Рекламации',
-            value: (claimsGrowth > 0 ? '+' : '') + round(claimsGrowth, 1) + '%',
-            threshold: 'желтый: выше 20%, красный: выше 30%',
-            status: statusByHighBad(claimsGrowth, 20, 30),
-            signal: 'Качество начинает угрожать повторным продажам.',
-            action: 'Разобрать причины по продукту, филиалу или команде.'
-          },
-          {
-            group: 'service',
-            title: 'Повторные жалобы',
-            value: round(repeatClaimsShare, 1) + '% обращений',
-            threshold: 'желтый: выше 7%, красный: выше 10%',
-            status: statusByHighBad(repeatClaimsShare, 7, 10),
-            signal: 'Проблема клиента не решается с первого раза.',
-            action: 'Изменить процесс обслуживания и усилить контроль сервиса.'
-          },
-          {
-            group: 'service',
-            title: 'Срывы сроков поставки / работ',
-            value: round(delayShare, 1) + '% заказов',
-            threshold: 'желтый: выше 10%, красный: выше 15%',
-            status: statusByHighBad(delayShare, 10, 15),
-            signal: 'Растет риск штрафов, скидок и ухода клиентов.',
-            action: 'Пересчитать график, предупредить клиентов и усилить ресурсы.'
+      var indicators = [
+        {
+          id: 'ordersChange',
+          group: 'demand',
+          title: 'Количество заявок / заказов',
+          hint: 'Показывает, не проседает ли поток новых продаж.',
+          fields: [
+            { name: 'current', label: 'Заказы за месяц, шт.' },
+            { name: 'previous', label: 'Заказы месяц назад, шт.' }
+          ],
+          calc: function (v) {
+            var value = change(n(v, 'current'), n(v, 'previous'));
+            return {
+              value: formatPercent(value),
+              threshold: 'желтый: –10%, красный: –15%',
+              status: value <= -15 ? 'red' : value <= -10 ? 'yellow' : 'green',
+              signal: 'Показывает, не проседает ли поток новых продаж.',
+              action: 'Проверить каналы продаж и пересчитать прогноз выручки.'
+            };
           }
-        ];
+        },
+        {
+          id: 'conversion',
+          group: 'demand',
+          title: 'Конверсия в сделку',
+          hint: 'Показывает, как клиенты проходят воронку продаж.',
+          fields: [
+            { name: 'deals', label: 'Сделки, шт.' },
+            { name: 'leads', label: 'Заявки, шт.' }
+          ],
+          calc: function (v) {
+            var value = pct(n(v, 'deals'), n(v, 'leads'));
+            return {
+              value: round(value, 1) + '%',
+              threshold: 'желтый: ниже 25%, красный: ниже 20%',
+              status: lowBad(value, 25, 20),
+              signal: 'Клиенты хуже проходят воронку, будущая выручка под риском.',
+              action: 'Разобрать причины отказов, цену и условия сделок.'
+            };
+          }
+        },
+        {
+          id: 'contractation',
+          group: 'demand',
+          title: 'Уровень контрактации',
+          hint: 'Показывает, какая часть будущей выручки уже обеспечена договорами.',
+          fields: [
+            { name: 'signed', label: 'Подписано договоров, млн руб.' },
+            { name: 'plan', label: 'План контрактации, млн руб.' }
+          ],
+          calc: function (v) {
+            var value = pct(n(v, 'signed'), n(v, 'plan'));
+            return {
+              value: round(value, 1) + '% плана',
+              threshold: 'желтый: ниже 85%, красный: ниже 80%',
+              status: lowBad(value, 85, 80),
+              signal: 'Часть годовой выручки может не попасть в текущий год.',
+              action: 'Пересчитать БДР и показать собственнику недостижимую часть плана.'
+            };
+          }
+        },
+        {
+          id: 'dealSpeed',
+          group: 'demand',
+          title: 'Скорость прохождения сделки',
+          hint: 'Показывает, не сдвигается ли выручка вправо.',
+          fields: [
+            { name: 'days', label: 'Средний срок сделки, дней' }
+          ],
+          calc: function (v) {
+            var value = n(v, 'days');
+            return {
+              value: value + ' дней',
+              threshold: 'желтый: выше 30 дней, красный: выше 45 дней',
+              status: highBad(value, 30, 45),
+              signal: 'Клиенты дольше принимают решения, будущая выручка может сдвинуться.',
+              action: 'Проверить этапы согласования, цену и условия договора.'
+            };
+          }
+        },
+        {
+          id: 'postponedDeals',
+          group: 'demand',
+          title: 'Доля сделок, перенесенных на следующий период',
+          hint: 'Показывает, не уходит ли план продаж за пределы года.',
+          fields: [
+            { name: 'postponed', label: 'Перенесенные сделки, шт.' },
+            { name: 'pipeline', label: 'Все сделки в воронке, шт.' }
+          ],
+          calc: function (v) {
+            var value = pct(n(v, 'postponed'), n(v, 'pipeline'));
+            return {
+              value: round(value, 1) + '%',
+              threshold: 'желтый: выше 10%, красный: выше 20%',
+              status: highBad(value, 10, 20),
+              signal: 'План продаж выглядит живым, но фактически уходит в следующий период.',
+              action: 'Разделить сделки на реальные для года и перенесенные.'
+            };
+          }
+        },
+        {
+          id: 'renewals',
+          group: 'demand',
+          title: 'Продления клиентов',
+          hint: 'Показывает устойчивость клиентской базы.',
+          fields: [
+            { name: 'renewed', label: 'Продлили договор, шт.' },
+            { name: 'due', label: 'Подлежали продлению, шт.' }
+          ],
+          calc: function (v) {
+            var value = pct(n(v, 'renewed'), n(v, 'due'));
+            return {
+              value: round(value, 1) + '%',
+              threshold: 'желтый: ниже 85%, красный: ниже 75%',
+              status: lowBad(value, 85, 75),
+              signal: 'Клиентская база может просесть до того, как это отразится в выручке.',
+              action: 'Запустить удержание, проверить цену, сервис и причины отказов.'
+            };
+          }
+        },
+        {
+          id: 'topClients',
+          group: 'demand',
+          title: 'Динамика топ-клиентов',
+          hint: 'Показывает, не теряет ли бизнес ключевой источник результата года.',
+          fields: [
+            { name: 'current', label: 'Выручка топ-клиентов сейчас, млн руб.' },
+            { name: 'previous', label: 'Выручка тех же клиентов год назад, млн руб.' }
+          ],
+          calc: function (v) {
+            var value = change(n(v, 'current'), n(v, 'previous'));
+            return {
+              value: formatPercent(value),
+              threshold: 'желтый: ниже –10%, красный: ниже –20%',
+              status: value <= -20 ? 'red' : value <= -10 ? 'yellow' : 'green',
+              signal: 'Один или несколько крупных клиентов могут изменить результат года.',
+              action: 'Разобрать каждого топ-клиента и сценарий замещения выручки.'
+            };
+          }
+        },
+
+        {
+          id: 'discountShare',
+          group: 'demandQuality',
+          title: 'Доля продаж со скидками',
+          hint: 'Показывает, не выполняет ли компания план продаж за счет уступок.',
+          fields: [
+            { name: 'discountDeals', label: 'Сделки со скидкой, шт.' },
+            { name: 'totalDeals', label: 'Всего сделок, шт.' }
+          ],
+          calc: function (v) {
+            var value = pct(n(v, 'discountDeals'), n(v, 'totalDeals'));
+            return {
+              value: round(value, 1) + '% сделок',
+              threshold: 'желтый: выше 35%, красный: выше 45%',
+              status: highBad(value, 35, 45),
+              signal: 'План продаж все чаще выполняется за счет уступок.',
+              action: 'Проверить правила скидок и мотивацию продаж.'
+            };
+          }
+        },
+        {
+          id: 'discountDepth',
+          group: 'demandQuality',
+          title: 'Средняя глубина скидки',
+          hint: 'Показывает, насколько скидки съедают маржу.',
+          fields: [
+            { name: 'discountSum', label: 'Сумма скидок, млн руб.' },
+            { name: 'basePrice', label: 'Цена до скидок, млн руб.' }
+          ],
+          calc: function (v) {
+            var value = pct(n(v, 'discountSum'), n(v, 'basePrice'));
+            return {
+              value: round(value, 1) + '%',
+              threshold: 'желтый: выше 10%, красный: выше 15%',
+              status: highBad(value, 10, 15),
+              signal: 'Компания покупает выручку за счет маржи.',
+              action: 'Ввести согласование крупных скидок с CFO.'
+            };
+          }
+        },
+        {
+          id: 'clientPayback',
+          group: 'demandQuality',
+          title: 'Окупаемость привлечения клиента',
+          hint: 'Показывает, за сколько месяцев окупается новый клиент.',
+          fields: [
+            { name: 'cost', label: 'Затраты на привлечение, тыс. руб.' },
+            { name: 'monthlyMargin', label: 'Валовая прибыль клиента в месяц, тыс. руб.' }
+          ],
+          calc: function (v) {
+            var value = n(v, 'cost') / n(v, 'monthlyMargin');
+            return {
+              value: round(value, 1) + ' мес.',
+              threshold: 'желтый: выше 9 мес., красный: выше 12 мес.',
+              status: highBad(value, 9, 12),
+              signal: 'Новый клиент становится дорогим до первой нормальной выручки.',
+              action: 'Проверить бесплатные периоды, интеграции и сервисные условия.'
+            };
+          }
+        },
+        {
+          id: 'dealMargin',
+          group: 'demandQuality',
+          title: 'Маржа сделки после скидок и допусловий',
+          hint: 'Показывает реальную экономику продажи.',
+          fields: [
+            { name: 'revenue', label: 'Выручка по сделке, млн руб.' },
+            { name: 'directCosts', label: 'Прямые затраты, млн руб.' },
+            { name: 'discountsAndExtras', label: 'Скидки и допусловия, млн руб.' }
+          ],
+          calc: function (v) {
+            var revenue = n(v, 'revenue');
+            var margin = pct(revenue - n(v, 'directCosts') - n(v, 'discountsAndExtras'), revenue);
+            return {
+              value: round(margin, 1) + '%',
+              threshold: 'желтый: ниже 25%, красный: ниже 15%',
+              status: lowBad(margin, 25, 15),
+              signal: 'Продажи могут расти, но экономика сделки ухудшается.',
+              action: 'Пересмотреть цену, условия сделки или минимальную маржу.'
+            };
+          }
+        },
+        {
+          id: 'graceChurn',
+          group: 'demandQuality',
+          title: 'Клиенты, ушедшие после льготного периода',
+          hint: 'Показывает, не привлекает ли бизнес клиентов только на период скидок.',
+          fields: [
+            { name: 'left', label: 'Ушли после льготного периода, шт.' },
+            { name: 'graceClients', label: 'Клиенты на льготных условиях, шт.' }
+          ],
+          calc: function (v) {
+            var value = pct(n(v, 'left'), n(v, 'graceClients'));
+            return {
+              value: round(value, 1) + '%',
+              threshold: 'желтый: выше 15%, красный: выше 25%',
+              status: highBad(value, 15, 25),
+              signal: 'Клиент может не окупить затраты на запуск и привлечение.',
+              action: 'Пересчитать окупаемость льготных условий и правила промо.'
+            };
+          }
+        },
+        {
+          id: 'promoConversion',
+          group: 'demandQuality',
+          title: 'Конверсия промоакций в оплаченные сделки',
+          hint: 'Показывает отдачу от маркетинговой активности.',
+          fields: [
+            { name: 'paidDeals', label: 'Оплаченные сделки после промо, шт.' },
+            { name: 'promoLeads', label: 'Лиды или участники промо, шт.' }
+          ],
+          calc: function (v) {
+            var value = pct(n(v, 'paidDeals'), n(v, 'promoLeads'));
+            return {
+              value: round(value, 1) + '%',
+              threshold: 'желтый: ниже 8%, красный: ниже 5%',
+              status: lowBad(value, 8, 5),
+              signal: 'Компания тратит деньги на активность без качественной выручки.',
+              action: 'Остановить неэффективные акции и пересобрать механику промо.'
+            };
+          }
+        },
+
+        {
+          id: 'criticalMilestones',
+          group: 'execution',
+          title: 'Выполнение ключевых этапов проекта',
+          hint: 'Показывает, не уйдет ли проект за пределы года.',
+          fields: [
+            { name: 'delays', label: 'Сорвано критичных этапов, шт.' }
+          ],
+          calc: function (v) {
+            var value = n(v, 'delays');
+            return {
+              value: value + ' сорвано',
+              threshold: 'желтый: 1 этап, красный: 2 и более',
+              status: value >= 2 ? 'red' : value >= 1 ? 'yellow' : 'green',
+              signal: 'Срок проекта может уйти за пределы года.',
+              action: 'Пересчитать сроки, ресурсы и финансовый результат.'
+            };
+          }
+        },
+        {
+          id: 'capacityLoad',
+          group: 'execution',
+          title: 'Загрузка мощностей',
+          hint: 'Показывает, есть ли у компании ресурс выполнить новые заказы.',
+          fields: [
+            { name: 'load', label: 'Текущая загрузка, ед.' },
+            { name: 'capacity', label: 'Максимальная мощность, ед.' }
+          ],
+          calc: function (v) {
+            var value = pct(n(v, 'load'), n(v, 'capacity'));
+            return {
+              value: round(value, 1) + '%',
+              threshold: 'желтый: выше 90%, красный: выше 95%',
+              status: highBad(value, 90, 95),
+              signal: 'Новые заказы могут создать очереди, переработки и срывы сроков.',
+              action: 'Приоритизировать заказы и оценить ресурсное усиление.'
+            };
+          }
+        },
+        {
+          id: 'criticalFunctions',
+          group: 'execution',
+          title: 'Закрытость критичных функций',
+          hint: 'Показывает, хватает ли компетенций для исполнения обязательств.',
+          fields: [
+            { name: 'open', label: 'Не закрыто критичных функций, шт.' }
+          ],
+          calc: function (v) {
+            var value = n(v, 'open');
+            return {
+              value: value + ' не закрыто',
+              threshold: 'желтый: 1 функция, красный: 2 и более',
+              status: value >= 2 ? 'red' : value >= 1 ? 'yellow' : 'green',
+              signal: 'Команда может продать больше, чем способна выполнить.',
+              action: 'Привлечь подрядчика, закрыть вакансию или изменить график проекта.'
+            };
+          }
+        },
+        {
+          id: 'notClosedThisYear',
+          group: 'execution',
+          title: 'Заказы, которые не успеют закрыться до конца года',
+          hint: 'Показывает, какая часть плана уже уходит за период.',
+          fields: [
+            { name: 'afterYear', label: 'Заказы с закрытием после 31 декабря, шт.' },
+            { name: 'inWork', label: 'Все заказы в работе, шт.' }
+          ],
+          calc: function (v) {
+            var value = pct(n(v, 'afterYear'), n(v, 'inWork'));
+            return {
+              value: round(value, 1) + '%',
+              threshold: 'желтый: выше 10%, красный: выше 20%',
+              status: highBad(value, 10, 20),
+              signal: 'Часть плана уже не попадет в результат текущего года.',
+              action: 'Разделить прогноз на результат года и перенос на следующий период.'
+            };
+          }
+        },
+        {
+          id: 'scheduleVariance',
+          group: 'execution',
+          title: 'Отклонение от графика проекта',
+          hint: 'Показывает глубину отставания от плана.',
+          fields: [
+            { name: 'delayDays', label: 'Отставание от графика, дней' }
+          ],
+          calc: function (v) {
+            var value = n(v, 'delayDays');
+            return {
+              value: value + ' дней',
+              threshold: 'желтый: больше 10 дней, красный: больше 30 дней',
+              status: highBad(value, 10, 30),
+              signal: 'Проект может сдвинуть выручку, расходы и потребность в финансировании.',
+              action: 'Пересчитать календарь проекта и финансовую модель.'
+            };
+          }
+        },
+        {
+          id: 'supplierDependency',
+          group: 'execution',
+          title: 'Зависимость от одного поставщика или подрядчика',
+          hint: 'Показывает риск остановки исполнения.',
+          fields: [
+            { name: 'singleSupplierVolume', label: 'Критичные поставки у одного поставщика, млн руб.' },
+            { name: 'totalCriticalVolume', label: 'Все критичные поставки, млн руб.' }
+          ],
+          calc: function (v) {
+            var value = pct(n(v, 'singleSupplierVolume'), n(v, 'totalCriticalVolume'));
+            return {
+              value: round(value, 1) + '%',
+              threshold: 'желтый: выше 40%, красный: выше 60%',
+              status: highBad(value, 40, 60),
+              signal: 'Срыв одного контрагента может остановить исполнение обязательств.',
+              action: 'Найти альтернативного поставщика или запасной маршрут исполнения.'
+            };
+          }
+        },
+
+        {
+          id: 'claimsGrowth',
+          group: 'service',
+          title: 'Рекламации',
+          hint: 'Показывает, не растут ли проблемы качества.',
+          fields: [
+            { name: 'current', label: 'Рекламации за месяц, шт.' },
+            { name: 'previous', label: 'Рекламации месяц назад, шт.' }
+          ],
+          calc: function (v) {
+            var value = change(n(v, 'current'), n(v, 'previous'));
+            return {
+              value: formatPercent(value),
+              threshold: 'желтый: выше 20%, красный: выше 30%',
+              status: highBad(value, 20, 30),
+              signal: 'Качество начинает угрожать повторным продажам.',
+              action: 'Разобрать причины по продукту, филиалу или команде.'
+            };
+          }
+        },
+        {
+          id: 'repeatClaims',
+          group: 'service',
+          title: 'Повторные жалобы',
+          hint: 'Показывает, решает ли сервис проблему клиента с первого раза.',
+          fields: [
+            { name: 'repeat', label: 'Повторные жалобы, шт.' },
+            { name: 'total', label: 'Всего обращений, шт.' }
+          ],
+          calc: function (v) {
+            var value = pct(n(v, 'repeat'), n(v, 'total'));
+            return {
+              value: round(value, 1) + '% обращений',
+              threshold: 'желтый: выше 7%, красный: выше 10%',
+              status: highBad(value, 7, 10),
+              signal: 'Проблема клиента не решается с первого раза.',
+              action: 'Изменить процесс обслуживания и усилить контроль сервиса.'
+            };
+          }
+        },
+        {
+          id: 'delayedOrders',
+          group: 'service',
+          title: 'Срывы сроков поставки / работ',
+          hint: 'Показывает риск штрафов, скидок и ухода клиентов.',
+          fields: [
+            { name: 'delayed', label: 'Заказы с нарушением срока, шт.' },
+            { name: 'total', label: 'Всего заказов, шт.' }
+          ],
+          calc: function (v) {
+            var value = pct(n(v, 'delayed'), n(v, 'total'));
+            return {
+              value: round(value, 1) + '% заказов',
+              threshold: 'желтый: выше 10%, красный: выше 15%',
+              status: highBad(value, 10, 15),
+              signal: 'Растет риск штрафов, скидок и ухода клиентов.',
+              action: 'Пересчитать график, предупредить клиентов и усилить ресурсы.'
+            };
+          }
+        },
+        {
+          id: 'compensations',
+          group: 'service',
+          title: 'Заказы с компенсациями клиентам',
+          hint: 'Показывает, начинают ли операционные сбои съедать маржу.',
+          fields: [
+            { name: 'compensated', label: 'Заказы с компенсациями, шт.' },
+            { name: 'total', label: 'Всего заказов, шт.' }
+          ],
+          calc: function (v) {
+            var value = pct(n(v, 'compensated'), n(v, 'total'));
+            return {
+              value: round(value, 1) + '%',
+              threshold: 'желтый: выше 5%, красный: выше 10%',
+              status: highBad(value, 5, 10),
+              signal: 'Скидки, штрафы и бонусы уже превращают сбои в финансовые потери.',
+              action: 'Разобрать причины компенсаций и остановить повторяющиеся сбои.'
+            };
+          }
+        },
+        {
+          id: 'repeatPurchases',
+          group: 'service',
+          title: 'Повторные покупки / повторные заказы',
+          hint: 'Показывает, не слабеет ли клиентская база.',
+          fields: [
+            { name: 'repeatClients', label: 'Клиенты с повторными заказами, шт.' },
+            { name: 'activeClients', label: 'Активные клиенты, шт.' }
+          ],
+          calc: function (v) {
+            var value = pct(n(v, 'repeatClients'), n(v, 'activeClients'));
+            return {
+              value: round(value, 1) + '%',
+              threshold: 'желтый: ниже 45%, красный: ниже 35%',
+              status: lowBad(value, 45, 35),
+              signal: 'Клиенты могут уходить или снижать активность до падения общей выручки.',
+              action: 'Проверить качество сервиса, продукт и причины снижения повторных заказов.'
+            };
+          }
+        }
+      ];
+
+      var inputTabs = root.querySelector('[data-fd-input-tabs]');
+      var inputPanels = root.querySelector('[data-fd-input-panels]');
+      var outputTabs = root.querySelector('[data-fd-output-tabs]');
+      var outputPanels = root.querySelector('[data-fd-output-panels]');
+      var inputArea = root.querySelector('[data-fd-input-area]');
+      var resultArea = root.querySelector('[data-fd-result-area]');
+      var currentFilter = 'all';
+
+      function panelHeadHtml(groupKey) {
+        var group = groups[groupKey];
+        return [
+          '<div class="fd-crisis-panel-head">',
+            '<span class="fd-crisis-panel-icon" aria-hidden="true">' + group.icon + '</span>',
+            '<div>',
+              '<h3 class="fd-crisis-panel-title">' + group.title + '</h3>',
+              '<p class="fd-crisis-panel-text">' + group.text + '</p>',
+            '</div>',
+          '</div>'
+        ].join('');
       }
 
-      function cardHtml(item) {
+      function renderInput() {
+        inputTabs.innerHTML = groupOrder.map(function (groupKey, index) {
+          return '<button class="fd-crisis-tab ' + (index === 0 ? 'fd-crisis-tab--active' : '') + '" type="button" data-fd-input-tab="' + groupKey + '">' + groups[groupKey].title + '</button>';
+        }).join('');
+
+        inputPanels.innerHTML = groupOrder.map(function (groupKey, index) {
+          var cards = indicators.filter(function (item) {
+            return item.group === groupKey;
+          }).map(function (item) {
+            var fields = item.fields.map(function (field) {
+              var name = item.id + '__' + field.name;
+              return [
+                '<div class="fd-crisis-field">',
+                  '<label for="' + name + '">' + field.label + '</label>',
+                  '<input id="' + name + '" name="' + name + '" type="number" step="any" inputmode="decimal">',
+                '</div>'
+              ].join('');
+            }).join('');
+
+            return [
+              '<article class="fd-crisis-input-card" data-fd-input-card="' + item.id + '">',
+                '<h4 class="fd-crisis-input-card__title">' + item.title + '</h4>',
+                '<p class="fd-crisis-input-card__hint">' + item.hint + '</p>',
+                '<div class="fd-crisis-fields">' + fields + '</div>',
+                '<div class="fd-crisis-live-result" data-fd-live-result="' + item.id + '">Заполните поля — показатель рассчитается автоматически.</div>',
+              '</article>'
+            ].join('');
+          }).join('');
+
+          return [
+            '<section class="fd-crisis-input-panel ' + (index === 0 ? 'fd-crisis-input-panel--active' : '') + '" data-fd-input-panel="' + groupKey + '">',
+              panelHeadHtml(groupKey),
+              '<div class="fd-crisis-input-list">' + cards + '</div>',
+            '</section>'
+          ].join('');
+        }).join('');
+      }
+
+      function collectIndicatorValues(indicator) {
+        var values = {};
+        indicator.fields.forEach(function (field) {
+          var input = root.querySelector('[name="' + indicator.id + '__' + field.name + '"]');
+          values[field.name] = input && input.value !== '' ? Number(input.value) : null;
+        });
+        return values;
+      }
+
+      function calculateIndicator(indicator) {
+        if (!allFilled(indicator)) return null;
+
+        var values = collectIndicatorValues(indicator);
+        var result = indicator.calc(values);
+
+        if (!result || result.value === null || result.value === 'NaN%' || result.value === 'NaN мес.') {
+          return null;
+        }
+
+        return {
+          id: indicator.id,
+          group: indicator.group,
+          title: indicator.title,
+          value: result.value,
+          threshold: result.threshold,
+          status: result.status,
+          signal: result.signal,
+          action: result.action
+        };
+      }
+
+      function updateLiveResult(indicator) {
+        var box = root.querySelector('[data-fd-live-result="' + indicator.id + '"]');
+        if (!box) return;
+
+        var result = calculateIndicator(indicator);
+        if (!result) {
+          box.innerHTML = 'Заполните поля — показатель рассчитается автоматически.';
+          return;
+        }
+
+        box.innerHTML = '<strong>' + result.value + '</strong> · статус: ' + statusLabel(result.status);
+      }
+
+      function buildResultCard(item) {
         return [
-          '<article class="fd-crisis-card fd-crisis-card--' + item.status + '" data-fd-status="' + item.status + '">',
-            '<div class="fd-crisis-card__top">',
-              '<h4 class="fd-crisis-card__title">' + item.title + '</h4>',
+          '<article class="fd-crisis-output-card fd-crisis-output-card--' + item.status + '" data-fd-status="' + item.status + '">',
+            '<div class="fd-crisis-output-card__top">',
+              '<h4 class="fd-crisis-output-card__title">' + item.title + '</h4>',
               '<span class="fd-crisis-status">' + statusLabel(item.status) + '</span>',
             '</div>',
             '<div class="fd-crisis-values">',
@@ -1074,62 +1404,53 @@
                 '<span class="fd-crisis-value-box__value">' + item.threshold + '</span>',
               '</div>',
             '</div>',
-            '<div class="fd-crisis-card__row">',
-              '<span class="fd-crisis-card__label">О чем сигнализирует</span>',
-              '<p class="fd-crisis-card__text">' + item.signal + '</p>',
+            '<div class="fd-crisis-output-card__row">',
+              '<span class="fd-crisis-output-card__label">О чем сигнализирует</span>',
+              '<p class="fd-crisis-output-card__text">' + item.signal + '</p>',
             '</div>',
-            '<div class="fd-crisis-card__row">',
-              '<span class="fd-crisis-card__label">Что делать</span>',
-              '<p class="fd-crisis-card__text">' + item.action + '</p>',
+            '<div class="fd-crisis-output-card__row">',
+              '<span class="fd-crisis-output-card__label">Что делать</span>',
+              '<p class="fd-crisis-output-card__text">' + item.action + '</p>',
             '</div>',
           '</article>'
         ].join('');
       }
 
-      function renderDashboards(indicators) {
-        var groups = ['demand', 'demandQuality', 'execution', 'service'];
+      function switchInputTab(target) {
+        root.querySelectorAll('[data-fd-input-tab]').forEach(function (tab) {
+          tab.classList.toggle('fd-crisis-tab--active', tab.getAttribute('data-fd-input-tab') === target);
+        });
 
-        panelsWrap.innerHTML = groups.map(function (group, index) {
-          var meta = groupMeta[group];
-          var cards = indicators
-            .filter(function (item) { return item.group === group; })
-            .map(cardHtml)
-            .join('');
+        root.querySelectorAll('[data-fd-input-panel]').forEach(function (panel) {
+          panel.classList.toggle('fd-crisis-input-panel--active', panel.getAttribute('data-fd-input-panel') === target);
+        });
+      }
 
-          return [
-            '<section class="fd-crisis-panel ' + (index === 0 ? 'fd-crisis-panel--active' : '') + '" data-fd-panel="' + group + '">',
-              '<div class="fd-crisis-panel__head">',
-                '<span class="fd-crisis-panel__icon" aria-hidden="true">' + meta.icon + '</span>',
-                '<div>',
-                  '<h3 class="fd-crisis-panel__title">' + meta.title + '</h3>',
-                  '<p class="fd-crisis-panel__text">' + meta.text + '</p>',
-                '</div>',
-              '</div>',
-              '<div class="fd-crisis-cards">' + cards + '</div>',
-              '<div class="fd-crisis-empty">В выбранном статусе показателей нет.</div>',
-            '</section>'
-          ].join('');
-        }).join('');
+      function switchOutputTab(target) {
+        root.querySelectorAll('[data-fd-output-tab]').forEach(function (tab) {
+          tab.classList.toggle('fd-crisis-tab--active', tab.getAttribute('data-fd-output-tab') === target);
+        });
 
-        results.classList.add('fd-crisis-results--visible');
-        applyFilter(currentFilter);
+        root.querySelectorAll('[data-fd-output-panel]').forEach(function (panel) {
+          panel.classList.toggle('fd-crisis-output-panel--active', panel.getAttribute('data-fd-output-panel') === target);
+        });
       }
 
       function applyFilter(filter) {
         currentFilter = filter;
 
-        dashboard.querySelectorAll('.fd-crisis-filter__button').forEach(function (button) {
+        root.querySelectorAll('[data-fd-filter]').forEach(function (button) {
           button.classList.toggle('fd-crisis-filter__button--active', button.getAttribute('data-fd-filter') === filter);
         });
 
-        dashboard.querySelectorAll('.fd-crisis-panel').forEach(function (panel) {
+        root.querySelectorAll('[data-fd-output-panel]').forEach(function (panel) {
           var visibleCount = 0;
 
-          panel.querySelectorAll('.fd-crisis-card').forEach(function (card) {
+          panel.querySelectorAll('.fd-crisis-output-card').forEach(function (card) {
             var status = card.getAttribute('data-fd-status');
-            var shouldShow = filter === 'all' || status === filter;
-            card.hidden = !shouldShow;
-            if (shouldShow) visibleCount += 1;
+            var show = filter === 'all' || status === filter;
+            card.hidden = !show;
+            if (show) visibleCount += 1;
           });
 
           var empty = panel.querySelector('.fd-crisis-empty');
@@ -1139,60 +1460,93 @@
         });
       }
 
-      function collectData() {
-        var formData = new FormData(form);
-        var data = {};
+      function buildDashboard() {
+        var calculated = indicators.map(calculateIndicator).filter(Boolean);
 
-        Object.keys(defaultValues).forEach(function (key) {
-          data[key] = numberValue(formData, key);
+        var groupsWithData = groupOrder.filter(function (groupKey) {
+          return calculated.some(function (item) {
+            return item.group === groupKey;
+          });
         });
 
-        return data;
+        if (!groupsWithData.length) {
+          alert('Заполните данные хотя бы по одному индикатору.');
+          return;
+        }
+
+        outputTabs.innerHTML = groupsWithData.map(function (groupKey, index) {
+          return '<button class="fd-crisis-tab ' + (index === 0 ? 'fd-crisis-tab--active' : '') + '" type="button" data-fd-output-tab="' + groupKey + '">' + groups[groupKey].title + '</button>';
+        }).join('');
+
+        outputPanels.innerHTML = groupsWithData.map(function (groupKey, index) {
+          var cards = calculated.filter(function (item) {
+            return item.group === groupKey;
+          }).map(buildResultCard).join('');
+
+          return [
+            '<section class="fd-crisis-output-panel ' + (index === 0 ? 'fd-crisis-output-panel--active' : '') + '" data-fd-output-panel="' + groupKey + '">',
+              panelHeadHtml(groupKey),
+              '<div class="fd-crisis-output-cards">' + cards + '</div>',
+              '<div class="fd-crisis-empty">В выбранном статусе показателей нет.</div>',
+            '</section>'
+          ].join('');
+        }).join('');
+
+        inputArea.classList.add('fd-crisis-input-area--hidden');
+        resultArea.classList.add('fd-crisis-result-area--visible');
+        applyFilter(currentFilter);
+        resultArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
 
-      form.addEventListener('submit', function (event) {
-        event.preventDefault();
-        var data = collectData();
-        var indicators = buildIndicators(data);
-        renderDashboards(indicators);
-        results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      renderInput();
+
+      inputTabs.addEventListener('click', function (event) {
+        var tab = event.target.closest('[data-fd-input-tab]');
+        if (!tab) return;
+        switchInputTab(tab.getAttribute('data-fd-input-tab'));
       });
 
-      dashboard.querySelectorAll('.fd-crisis-tab').forEach(function (tab) {
-        tab.addEventListener('click', function () {
-          var target = tab.getAttribute('data-fd-tab');
+      outputTabs.addEventListener('click', function (event) {
+        var tab = event.target.closest('[data-fd-output-tab]');
+        if (!tab) return;
+        switchOutputTab(tab.getAttribute('data-fd-output-tab'));
+      });
 
-          dashboard.querySelectorAll('.fd-crisis-tab').forEach(function (item) {
-            item.classList.remove('fd-crisis-tab--active');
-          });
+      root.addEventListener('input', function (event) {
+        if (!event.target.matches('input')) return;
 
-          dashboard.querySelectorAll('.fd-crisis-panel').forEach(function (panel) {
-            panel.classList.remove('fd-crisis-panel--active');
-          });
-
-          tab.classList.add('fd-crisis-tab--active');
-
-          var activePanel = dashboard.querySelector('[data-fd-panel="' + target + '"]');
-          if (activePanel) {
-            activePanel.classList.add('fd-crisis-panel--active');
-          }
+        var name = event.target.name || '';
+        var id = name.split('__')[0];
+        var indicator = indicators.find(function (item) {
+          return item.id === id;
         });
+
+        if (indicator) updateLiveResult(indicator);
       });
 
-      dashboard.querySelectorAll('.fd-crisis-filter__button').forEach(function (button) {
+      root.querySelector('[data-fd-build]').addEventListener('click', buildDashboard);
+
+      root.querySelector('[data-fd-back]').addEventListener('click', function () {
+        resultArea.classList.remove('fd-crisis-result-area--visible');
+        inputArea.classList.remove('fd-crisis-input-area--hidden');
+        inputArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+
+      root.querySelector('[data-fd-clear]').addEventListener('click', function () {
+        root.querySelectorAll('.fd-crisis-field input').forEach(function (input) {
+          input.value = '';
+        });
+
+        indicators.forEach(updateLiveResult);
+      });
+
+      root.querySelectorAll('[data-fd-filter]').forEach(function (button) {
         button.addEventListener('click', function () {
           applyFilter(button.getAttribute('data-fd-filter'));
         });
       });
 
-      resetButton.addEventListener('click', function () {
-        Object.keys(defaultValues).forEach(function (key) {
-          var input = form.querySelector('[name="' + key + '"]');
-          if (input) input.value = defaultValues[key];
-        });
-      });
-
-      printButtons.forEach(function (button) {
+      root.querySelectorAll('[data-fd-print]').forEach(function (button) {
         button.addEventListener('click', function () {
           window.print();
         });
