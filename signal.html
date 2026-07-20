@@ -120,17 +120,18 @@
       display: none;
     }
 
-    .fd-crisis-input-intro {
-      margin-bottom: 14px;
-      padding: 13px 15px;
-      color: var(--fd-primary-dark);
-      font-size: 16px;
-      line-height: 1.4;
-      background: #fff;
-      border: 1px solid var(--fd-border);
-      border-left: 5px solid var(--fd-primary);
-      border-radius: 14px;
-    }
+.fd-crisis-input-intro__badge {
+  align-self: flex-start;
+  padding: 5px 9px;
+  color: #fff;
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: var(--fd-primary);
+  border-radius: 999px;
+}
 
     .fd-crisis-tabs {
       display: grid;
@@ -731,9 +732,13 @@
 
     <section class="fd-crisis-input-area" data-fd-input-area>
       <div class="fd-crisis-input-intro">
-        Введите исходные данные. Используйте только те индикаторы, которые подходят вашему бизнесу.
-        В дашборд попадут показатели, по которым есть полный набор исходных данных
-      </div>
+  <div class="fd-crisis-input-intro__badge">Как заполнить</div>
+  <div class="fd-crisis-input-intro__title">Введите исходные данные</div>
+  <div class="fd-crisis-input-intro__text">
+    Используйте только те индикаторы, которые подходят вашему бизнесу.
+    В дашборд попадут показатели, по которым есть полный набор исходных данных.
+  </div>
+</div>
 
       <nav class="fd-crisis-tabs" data-fd-input-tabs aria-label="Вкладки для ввода данных"></nav>
       <div data-fd-input-panels></div>
