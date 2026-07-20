@@ -37,47 +37,51 @@
     }
 
     .fd-crisis-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 18px;
-      padding: 22px 24px;
-      color: #fff;
-      background: linear-gradient(135deg, var(--fd-primary), var(--fd-primary-dark));
-    }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  min-height: 0;
+  margin: 0 0 10px;
+  padding: 14px 16px;
+  color: #fff;
+  background: #77408C !important;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
 
-    .fd-crisis-title {
-      margin: 0;
-      font-size: 28px;
-      line-height: 1.1;
-      font-weight: 700;
-    }
+.fd-crisis-title {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.15;
+}
 
-    .fd-crisis-period {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      min-width: 220px;
-      flex: 0 0 220px;
-    }
+.fd-crisis-period {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: auto;
+  min-width: 0;
+  flex: 0 0 auto;
+}
 
-    .fd-crisis-period label {
-      color: rgba(255, 255, 255, 0.86);
-      font-size: 12px;
-      font-weight: 700;
-    }
+.fd-crisis-period label {
+  color: #fff;
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 700;
+}
 
-    .fd-crisis-period input {
-      width: 100%;
-      min-height: 38px;
-      padding: 8px 11px;
-      color: var(--fd-text);
-      font-size: 14px;
-      background: #fff;
-      border: 0;
-      border-radius: 10px;
-    }
-
+.fd-crisis-period input {
+  width: 120px;
+  min-height: 22px;
+  padding: 3px 6px;
+  color: #2A2A2A;
+  font-size: 8.5px;
+  line-height: 1;
+  background: #fff;
+  border: 0;
+  border-radius: 5px;
     .fd-crisis-button {
       display: inline-flex;
       align-items: center;
