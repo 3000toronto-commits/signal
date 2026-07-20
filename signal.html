@@ -39,6 +39,7 @@
     .fd-crisis-header {
       display: flex;
       justify-content: space-between;
+      align-items: flex-start;
       gap: 18px;
       padding: 22px 24px;
       color: #fff;
@@ -46,18 +47,35 @@
     }
 
     .fd-crisis-title {
-      margin: 0 0 6px;
+      margin: 0;
       font-size: 28px;
       line-height: 1.1;
       font-weight: 700;
     }
 
-    .fd-crisis-subtitle {
-      max-width: 760px;
-      margin: 0;
+    .fd-crisis-period {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      min-width: 220px;
+      flex: 0 0 220px;
+    }
+
+    .fd-crisis-period label {
+      color: rgba(255, 255, 255, 0.86);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .fd-crisis-period input {
+      width: 100%;
+      min-height: 38px;
+      padding: 8px 11px;
+      color: var(--fd-text);
       font-size: 14px;
-      line-height: 1.35;
-      opacity: 0.94;
+      background: #fff;
+      border: 0;
+      border-radius: 10px;
     }
 
     .fd-crisis-button {
@@ -76,12 +94,6 @@
     .fd-crisis-button--primary {
       color: #fff;
       background: var(--fd-primary);
-    }
-
-    .fd-crisis-button--white {
-      color: var(--fd-primary);
-      background: #fff;
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.16);
     }
 
     .fd-crisis-button--ghost {
@@ -106,6 +118,18 @@
 
     .fd-crisis-input-area--hidden {
       display: none;
+    }
+
+    .fd-crisis-input-intro {
+      margin-bottom: 14px;
+      padding: 13px 15px;
+      color: var(--fd-primary-dark);
+      font-size: 14px;
+      line-height: 1.4;
+      background: #fff;
+      border: 1px solid var(--fd-border);
+      border-left: 5px solid var(--fd-primary);
+      border-radius: 14px;
     }
 
     .fd-crisis-tabs {
@@ -435,11 +459,22 @@
       letter-spacing: 0.03em;
     }
 
-    .fd-crisis-output-card__text {
+    .fd-crisis-output-card__editable {
+      min-height: 42px;
       margin: 0;
+      padding: 7px 8px;
       color: var(--fd-text);
       font-size: 12.5px;
       line-height: 1.32;
+      background: #FDFBFE;
+      border: 1px solid #EEE1F4;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    .fd-crisis-output-card__editable:focus {
+      border-color: var(--fd-primary);
+      box-shadow: 0 0 0 2px rgba(119, 64, 140, 0.12);
     }
 
     .fd-crisis-empty {
@@ -473,6 +508,12 @@
       .fd-crisis-result-controls {
         flex-direction: column;
         align-items: flex-start;
+      }
+
+      .fd-crisis-period {
+        width: 100%;
+        min-width: 0;
+        flex: 0 0 auto;
       }
 
       .fd-crisis-tabs {
@@ -547,14 +588,13 @@
 
       .fd-crisis-input-area,
       .fd-crisis-result-controls,
-      .fd-crisis-output-tabs,
-      .fd-crisis-header .fd-crisis-button {
+      .fd-crisis-output-tabs {
         display: none !important;
       }
 
       .fd-crisis-header {
-        display: block;
-        padding: 14px 0 12px;
+        display: flex;
+        padding: 14px 12px 12px;
         color: #fff;
         background: #77408C !important;
         -webkit-print-color-adjust: exact;
@@ -562,13 +602,23 @@
       }
 
       .fd-crisis-title {
-        margin-left: 12px;
         font-size: 20px;
       }
 
-      .fd-crisis-subtitle {
-        margin-left: 12px;
-        font-size: 10.5px;
+      .fd-crisis-period {
+        min-width: 180px;
+        flex: 0 0 180px;
+      }
+
+      .fd-crisis-period label {
+        font-size: 8px;
+      }
+
+      .fd-crisis-period input {
+        min-height: 24px;
+        padding: 4px 6px;
+        font-size: 9px;
+        border: 1px solid rgba(255,255,255,0.5);
       }
 
       .fd-crisis-result-area {
@@ -648,9 +698,15 @@
         font-size: 7px;
       }
 
-      .fd-crisis-output-card__text {
+      .fd-crisis-output-card__editable {
+        min-height: 0;
+        padding: 0;
+        color: #2A2A2A;
         font-size: 8.5px;
         line-height: 1.2;
+        background: transparent;
+        border: 0;
+        box-shadow: none;
       }
 
       .fd-crisis-note {
@@ -665,14 +721,20 @@
     <header class="fd-crisis-header">
       <div>
         <h2 class="fd-crisis-title">Кризис-панель собственника</h2>
-        <p class="fd-crisis-subtitle">
-          Введите исходные данные по индикаторам. После расчета сформируйте дашборд, выберите уровень риска показателей, которые вывести на итоговом дашборде и сохраните результат в PDF
-        </p>
       </div>
-      <button class="fd-crisis-button fd-crisis-button--white" type="button" data-fd-print>Скачать PDF</button>
+
+      <div class="fd-crisis-period">
+        <label for="fd-crisis-period-field">Период</label>
+        <input id="fd-crisis-period-field" type="text" data-fd-period placeholder="Например, август 2025">
+      </div>
     </header>
 
     <section class="fd-crisis-input-area" data-fd-input-area>
+      <div class="fd-crisis-input-intro">
+        Введите исходные данные. Используйте только те индикаторы, которые подходят вашему бизнесу.
+        В дашборд попадут показатели, по которым есть полный набор исходных данных.
+      </div>
+
       <nav class="fd-crisis-tabs" data-fd-input-tabs aria-label="Вкладки для ввода данных"></nav>
       <div data-fd-input-panels></div>
 
@@ -684,21 +746,24 @@
           Очистить поля
         </button>
       </div>
-
-      <p class="fd-crisis-note">
-        Заполните только те индикаторы, которые подходят вашему бизнесу. В дашборд попадут показатели,
-        по которым есть полный набор исходных данных
-      </p>
     </section>
 
     <section class="fd-crisis-result-area" data-fd-result-area aria-live="polite">
       <div class="fd-crisis-result-controls">
         <div class="fd-crisis-filter" aria-label="Фильтр показателей">
           <span class="fd-crisis-filter__label">Показать:</span>
-          <button class="fd-crisis-filter__button fd-crisis-filter__button--active" type="button" data-fd-filter="all">Все индикаторы</button>
-          <button class="fd-crisis-filter__button" type="button" data-fd-filter="green">Зеленый уровень риска</button>
-          <button class="fd-crisis-filter__button" type="button" data-fd-filter="yellow">Желтый уровень риска</button>
-          <button class="fd-crisis-filter__button" type="button" data-fd-filter="red">Красный уровень риска</button>
+          <button class="fd-crisis-filter__button fd-crisis-filter__button--active" type="button" data-fd-filter="all">
+            Все индикаторы
+          </button>
+          <button class="fd-crisis-filter__button fd-crisis-filter__button--active" type="button" data-fd-filter="green">
+            Зеленый уровень риска
+          </button>
+          <button class="fd-crisis-filter__button fd-crisis-filter__button--active" type="button" data-fd-filter="yellow">
+            Желтый уровень риска
+          </button>
+          <button class="fd-crisis-filter__button fd-crisis-filter__button--active" type="button" data-fd-filter="red">
+            Красный уровень риска
+          </button>
         </div>
 
         <div class="fd-crisis-input-actions" style="margin:0;padding:0;border:0;">
@@ -715,8 +780,8 @@
       <div data-fd-output-panels></div>
 
       <p class="fd-crisis-note">
-        <strong>Правило кризис-панели:</strong> выводите собственнику покзатели с красным и желтым уровнем риска,
-        которые приближаются к критической границе. Показатели с зеленым уровнем риска оставляйте в операционных дашбордах подразделений
+        <strong>Правило кризис-панели:</strong> выводите собственнику показатели с красным и желтым уровнем риска,
+        которые приближаются к критической границе. Показатели с зеленым уровнем риска оставляйте в операционных дашбордах подразделений.
       </p>
     </section>
   </div>
@@ -792,6 +857,15 @@
         return Number(values[key]);
       }
 
+      function escapeHtml(value) {
+        return String(value)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
       function allFilled(indicator) {
         return indicator.fields.every(function (field) {
           var input = root.querySelector('[name="' + indicator.id + '__' + field.name + '"]');
@@ -803,11 +877,11 @@
         {
           id: 'ordersChange',
           group: 'demand',
-          title: 'Количество заявок / заказов',
-          hint: 'Показывает, не проседает ли поток новых продаж',
+          title: 'Динамика заявок и заказов',
+          hint: 'Показывает, хватает ли входящих заявок и заказов, чтобы выполнить план продаж до конца года',
           fields: [
-            { name: 'current', label: 'Заказы за месяц, шт' },
-            { name: 'previous', label: 'Заказы месяц назад, шт' }
+            { name: 'current', label: 'Заявки или заказы за текущий месяц, шт.' },
+            { name: 'previous', label: 'Заявки или заказы за прошлый месяц, шт.' }
           ],
           calc: function (v) {
             var value = change(n(v, 'current'), n(v, 'previous'));
@@ -824,10 +898,10 @@
           id: 'conversion',
           group: 'demand',
           title: 'Конверсия в сделки',
-          hint: 'Показывает, как клиенты проходят воронку продаж',
+          hint: 'Показывает, какая часть заявок превращается в сделки',
           fields: [
-            { name: 'deals', label: 'Сделки, шт' },
-            { name: 'leads', label: 'Заявки, шт' }
+            { name: 'deals', label: 'Сделки, шт.' },
+            { name: 'leads', label: 'Заявки, шт.' }
           ],
           calc: function (v) {
             var value = pct(n(v, 'deals'), n(v, 'leads'));
@@ -835,19 +909,19 @@
               value: round(value, 1) + '%',
               threshold: 'желтый: ниже 25%, красный: ниже 20%',
               status: lowBad(value, 25, 20),
-              signal: 'Клиенты хуже проходят воронку, будущая выручка под риском',
-              action: 'Разобрать причины отказов, цены и условия сделок'
+              signal: 'Клиенты хуже проходят воронку продаж, поэтому будущая выручка под риском',
+              action: 'Разобрать причины отказов: цена, условия оплаты, сроки, договор, продукт или работа менеджера'
             };
           }
         },
         {
           id: 'contractation',
           group: 'demand',
-          title: 'Уровень контрактации',
-          hint: 'Показывает, какая часть плана уже обеспечена договорами',
+          title: 'Доля плана, подтвержденная договорами',
+          hint: 'Показывает, какая часть плановой выручки уже обеспечена подписанными договорами или твердыми заказами',
           fields: [
-            { name: 'signed', label: 'Подписано договоров, млн руб.' },
-            { name: 'plan', label: 'План контрактации, млн руб.' }
+            { name: 'signed', label: 'Сумма подписанных договоров к контрольной дате, млн руб.' },
+            { name: 'plan', label: 'Плановая сумма договоров к контрольной дате, млн руб.' }
           ],
           calc: function (v) {
             var value = pct(n(v, 'signed'), n(v, 'plan'));
@@ -855,18 +929,18 @@
               value: round(value, 1) + '% плана',
               threshold: 'желтый: ниже 85%, красный: ниже 80%',
               status: lowBad(value, 85, 80),
-              signal: 'Часть годовой выручки может не попасть в текущий год',
-              action: 'Пересчитать БДР и показать собственнику недостижимую часть плана'
+              signal: 'Если договоров к контрольной дате меньше плана, часть выручки года может не состояться или перейти на следующий период',
+              action: 'Проверить, какие договоры реально можно подписать до конца года, и пересчитать прогноз выручки'
             };
           }
         },
         {
           id: 'dealSpeed',
           group: 'demand',
-          title: 'Скорость прохождения сделок',
-          hint: 'Показывает, не затягиваются ли сделки, из-за чего часть выручки может перейти на следующий период.',
+          title: 'Срок прохождения сделки',
+          hint: 'Показывает, не затягиваются ли сделки, из-за чего часть выручки может перейти на следующий период',
           fields: [
-            { name: 'days', label: 'Средний срок сделки, дней' }
+            { name: 'days', label: 'Средний срок от заявки до договора, дней' }
           ],
           calc: function (v) {
             var value = n(v, 'days');
@@ -874,19 +948,19 @@
               value: value + ' дней',
               threshold: 'желтый: выше 30 дней, красный: выше 45 дней',
               status: highBad(value, 30, 45),
-              signal: 'Клиенты дольше принимают решения, выручка может сдвинуться на следующие периоды',
-              action: 'Проверить этапы согласования, цены и условия договоров'
+              signal: 'Клиенты дольше согласуют покупку, поэтому часть выручки может перейти на следующий период или сорваться',
+              action: 'Проверить, где сделки застревают: цена, договор, бюджет, условия оплаты или решение ЛПР'
             };
           }
         },
         {
           id: 'renewals',
           group: 'demand',
-          title: 'Доля клиентов, которые продлили договоры',
-          hint: 'Показывает устойчивость клиентской базы',
+          title: 'Доля продлений клиентов',
+          hint: 'Показывает, сколько клиентов продлили договор, подписку или обслуживание среди тех, у кого наступил срок продления',
           fields: [
-            { name: 'renewed', label: 'Продлили договор, шт' },
-            { name: 'due', label: 'Подлежали продлению, шт' }
+            { name: 'renewed', label: 'Клиенты, которые продлили договор в периоде, шт.' },
+            { name: 'due', label: 'Клиенты, у которых наступил срок продления, шт.' }
           ],
           calc: function (v) {
             var value = pct(n(v, 'renewed'), n(v, 'due'));
@@ -902,11 +976,11 @@
         {
           id: 'topClients',
           group: 'demand',
-          title: 'Динамика выручки, полученной от топ-клиентов',
-          hint: 'Показывает, не сокращают ли ключевые клиенты закупки по сравнению с сопоставимым периодом прошлого года',
+          title: 'Изменение выручки от топ-клиентов',
+          hint: 'Показывает, не сокращают ли ключевые клиенты закупки по сравнению с сопоставимым периодом',
           fields: [
-            { name: 'current', label: 'Выручка топ-клиентов за текущий период, млн руб.' },
-            { name: 'previous', label: 'Выручка тех же клиентов за сопоставимый период, млн руб.' }
+            { name: 'current', label: 'Выручка выбранных топ-клиентов за текущий период, млн руб.' },
+            { name: 'previous', label: 'Выручка этих же клиентов за сопоставимый период, млн руб.' }
           ],
           calc: function (v) {
             var value = change(n(v, 'current'), n(v, 'previous'));
@@ -926,8 +1000,8 @@
           title: 'Доля продаж со скидками',
           hint: 'Показывает, не выполняет ли компания план продаж за счет уступок',
           fields: [
-            { name: 'discountDeals', label: 'Сделки со скидкой, шт' },
-            { name: 'totalDeals', label: 'Всего сделок, шт' }
+            { name: 'discountDeals', label: 'Сделки со скидкой, шт.' },
+            { name: 'totalDeals', label: 'Всего сделок, шт.' }
           ],
           calc: function (v) {
             var value = pct(n(v, 'discountDeals'), n(v, 'totalDeals'));
@@ -943,11 +1017,11 @@
         {
           id: 'discountDepth',
           group: 'demandQuality',
-          title: 'Средняя глубина скидки',
-          hint: 'Показывает, какой процент выручки мы отдаем клиентам',
+          title: 'Средняя глубина скидки от прайсовой цены',
+          hint: 'Показывает, какую часть прайсовой выручки компания отдает клиентам в виде скидок',
           fields: [
-            { name: 'discountSum', label: 'Сумма предоставленных скидок, тыс. руб.' },
-            { name: 'basePrice', label: 'Сумма продаж до скидок, тыс. руб.' }
+            { name: 'discountSum', label: 'Общая сумма предоставленных скидок, млн руб.' },
+            { name: 'basePrice', label: 'Сумма продаж по прайсу до скидок, млн руб.' }
           ],
           calc: function (v) {
             var value = pct(n(v, 'discountSum'), n(v, 'basePrice'));
@@ -955,8 +1029,8 @@
               value: round(value, 1) + '%',
               threshold: 'желтый: выше 10%, красный: выше 15%',
               status: highBad(value, 10, 15),
-              signal: 'Компания снижает цену, чтобы закрыть сделки. Это может ухудшить маржу, если себестоимость и другие условия сделки не меняются',
-              action: 'Проверить скидки вместе с маржой по сделкам и правилами согласования уступок'
+              signal: 'Компания все чаще снижает цену, чтобы закрыть сделки. Это может ухудшить маржу, если себестоимость и другие условия сделки не меняются',
+              action: 'Проверить скидки вместе с маржей по сделкам и правилами согласования уступок'
             };
           }
         },
@@ -964,9 +1038,9 @@
           id: 'clientPayback',
           group: 'demandQuality',
           title: 'Окупаемость привлечения новых клиентов',
-          hint: 'Показывает, за сколько месяцев окупаются новые клиенты',
+          hint: 'Показывает, за сколько месяцев окупаются затраты на привлечение новых клиентов',
           fields: [
-            { name: 'cost', label: 'Затраты на привлечение новых клиентов, тыс. руб.' },
+            { name: 'cost', label: 'Затраты на привлечение новых клиентов за период, тыс. руб.' },
             { name: 'monthlyMargin', label: 'Валовая прибыль от этих клиентов в месяц, тыс. руб.' }
           ],
           calc: function (v) {
@@ -984,10 +1058,10 @@
           id: 'graceChurn',
           group: 'demandQuality',
           title: 'Доля клиентов, ушедших после льготного периода',
-          hint: 'Показывает, не привлекает ли бизнес клиентов только на период скидок',
+          hint: 'Показывает, не привлекает ли бизнес клиентов только на период скидок или бесплатных опций',
           fields: [
-            { name: 'left', label: 'Клиенты, ушедшие после льготного периода, шт' },
-            { name: 'graceClients', label: 'Клиенты, привлеченные на льготных условиях, шт' }
+            { name: 'left', label: 'Клиенты, ушедшие после льготного периода, шт.' },
+            { name: 'graceClients', label: 'Клиенты, привлеченные на льготных условиях, шт.' }
           ],
           calc: function (v) {
             var value = pct(n(v, 'left'), n(v, 'graceClients'));
@@ -995,7 +1069,7 @@
               value: round(value, 1) + '%',
               threshold: 'желтый: выше 15%, красный: выше 25%',
               status: highBad(value, 15, 25),
-              signal: 'Компания тратит на привлечение клиента больше, чем успевает заработать на нем после окончания льгот',
+              signal: 'Клиенты уходят после окончания скидок или бесплатных опций, и компания не успевает вернуть затраты на их привлечение',
               action: 'Проверить окупаемость скидок и бесплатных опций. Если клиенты уходят после льготного периода, изменить условия привлечения'
             };
           }
@@ -1004,10 +1078,10 @@
           id: 'promoConversion',
           group: 'demandQuality',
           title: 'Конверсия промоакций в оплаченные сделки',
-          hint: 'Показывает отдачу от маркетинговой активности',
+          hint: 'Показывает, превращаются ли промоакции в оплаченные сделки',
           fields: [
-            { name: 'paidDeals', label: 'Оплаченные сделки после промо, шт' },
-            { name: 'promoLeads', label: 'Лиды или участники промо, шт' }
+            { name: 'paidDeals', label: 'Оплаченные сделки после промо, шт.' },
+            { name: 'promoLeads', label: 'Лиды или участники промо, шт.' }
           ],
           calc: function (v) {
             var value = pct(n(v, 'paidDeals'), n(v, 'promoLeads'));
@@ -1015,7 +1089,7 @@
               value: round(value, 1) + '%',
               threshold: 'желтый: ниже 8%, красный: ниже 5%',
               status: lowBad(value, 8, 5),
-              signal: 'Компания тратит деньги на активность без качественной выручки',
+              signal: 'Компания тратит деньги на активность, которая не приводит к качественной выручке',
               action: 'Остановить неэффективные акции и пересобрать механику промо'
             };
           }
@@ -1025,9 +1099,9 @@
           id: 'criticalMilestones',
           group: 'execution',
           title: 'Выполнение ключевых этапов проекта',
-          hint: 'Показывает, успеет ли проект дать выручку и финансовый результат в текущем году',
+          hint: 'Показывает, успеет ли компания завершить критичные этапы проекта до конца года',
           fields: [
-            { name: 'delays', label: 'Сорвано критичных этапов, шт' }
+            { name: 'delays', label: 'Сорвано критичных этапов, шт.' }
           ],
           calc: function (v) {
             var value = n(v, 'delays');
@@ -1036,7 +1110,7 @@
               threshold: 'желтый: 1 этап, красный: 2 и более',
               status: value >= 2 ? 'red' : value >= 1 ? 'yellow' : 'green',
               signal: 'Если критичные этапы сорваны, проект может не дать выручку и финансовый результат в текущем году',
-              action: 'Пересчитать сроки, ресурсы, выручку года и потребность в финансировании'
+              action: 'Пересчитать график проекта, выручку текущего года, затраты и потребность в финансировании'
             };
           }
         },
@@ -1044,7 +1118,7 @@
           id: 'capacityLoad',
           group: 'execution',
           title: 'Загрузка мощностей',
-          hint: 'Показывает, есть ли у компании ресурс выполнить новые заказы',
+          hint: 'Показывает, сможет ли компания выполнить новые заказы без срывов сроков и роста затрат',
           fields: [
             { name: 'load', label: 'Текущая загрузка, ед.' },
             { name: 'capacity', label: 'Максимальная мощность, ед.' }
@@ -1055,8 +1129,8 @@
               value: round(value, 1) + '%',
               threshold: 'желтый: выше 90%, красный: выше 95%',
               status: highBad(value, 90, 95),
-              signal: 'Новые заказы могут создать очереди, переработки и срывы сроков',
-              action: 'Выбрать заказы, которые важнее выполнить до конца года, и решить, как увеличить мощности: добавить смены, людей, подрядчиков или оборудование'
+              signal: 'При высокой загрузке новые заказы могут привести к очередям, переработкам, срывам сроков и росту себестоимости исполнения',
+              action: 'Оставить в плане заказы, которые компания реально успеет выполнить, и посчитать стоимость усиления: дополнительные смены, подрядчики, логистика, оборудование'
             };
           }
         },
@@ -1066,8 +1140,8 @@
           title: 'Доля заказов, которые не дадут результат до конца года',
           hint: 'Показывает, какая часть заказов в работе не успеет перейти в выручку или закрытые этапы до конца года',
           fields: [
-            { name: 'afterYear', label: 'Заказы с закрытием после 31 декабря, шт' },
-            { name: 'inWork', label: 'Все заказы в работе, шт' }
+            { name: 'afterYear', label: 'Заказы или этапы, которые завершатся после 31 декабря, шт.' },
+            { name: 'inWork', label: 'Все заказы или этапы в работе, шт.' }
           ],
           calc: function (v) {
             var value = pct(n(v, 'afterYear'), n(v, 'inWork'));
@@ -1075,7 +1149,7 @@
               value: round(value, 1) + '%',
               threshold: 'желтый: выше 10%, красный: выше 20%',
               status: highBad(value, 10, 20),
-              signal: 'Часть плана уже не попадет в результат текущего года',
+              signal: 'Часть заказов в работе уже не успеет дать выручку или закрытые этапы в текущем году',
               action: 'Пересчитать прогноз года: отделить заказы, которые дадут результат до 31 декабря, от заказов, которые перейдут на следующий год'
             };
           }
@@ -1094,8 +1168,8 @@
               value: value + ' дней',
               threshold: 'желтый: больше 10 дней, красный: больше 30 дней',
               status: highBad(value, 10, 30),
-              signal: 'Отставание от графика может перенести выручку на следующий период, увеличить затраты и потребовать дополнительного финансирования',
-              action: 'Пересчитать график работ, выручку периода, дополнительные затраты и потребность в деньгах'
+              signal: 'Если проект отстает от графика, часть выручки может перейти на следующий период, а затраты и потребность в финансировании — вырасти',
+              action: 'Пересчитать график работ, срок признания выручки, дополнительные затраты и потребность в финансировании'
             };
           }
         },
@@ -1103,7 +1177,7 @@
           id: 'supplierDependency',
           group: 'execution',
           title: 'Зависимость от одного поставщика или подрядчика',
-          hint: 'Показывает риск остановки исполнения',
+          hint: 'Показывает, насколько выполнение заказов зависит от одного поставщика или подрядчика',
           fields: [
             { name: 'singleSupplierVolume', label: 'Критичные поставки у одного поставщика, млн руб.' },
             { name: 'totalCriticalVolume', label: 'Все критичные поставки, млн руб.' }
@@ -1114,8 +1188,8 @@
               value: round(value, 1) + '%',
               threshold: 'желтый: выше 40%, красный: выше 60%',
               status: highBad(value, 40, 60),
-              signal: 'Срыв поставки от одного контрагента может остановить исполнение обязательств',
-              action: 'Найти альтернативного поставщика или запасной маршрут исполнения'
+              signal: 'Если ключевой контрагент сорвет срок, компания может не выполнить заказы и перенести выручку на следующий период',
+              action: 'Подобрать запасного поставщика, пересмотреть сроки поставок и заранее оценить влияние задержки на результат года'
             };
           }
         },
@@ -1126,8 +1200,8 @@
           title: 'Рекламации',
           hint: 'Показывает, не растут ли проблемы качества',
           fields: [
-            { name: 'current', label: 'Рекламации за месяц, шт' },
-            { name: 'previous', label: 'Рекламации месяц назад, шт' }
+            { name: 'current', label: 'Рекламации за месяц, шт.' },
+            { name: 'previous', label: 'Рекламации месяц назад, шт.' }
           ],
           calc: function (v) {
             var value = change(n(v, 'current'), n(v, 'previous'));
@@ -1135,7 +1209,7 @@
               value: formatPercent(value),
               threshold: 'желтый: выше 20%, красный: выше 30%',
               status: highBad(value, 20, 30),
-              signal: 'Качество начинает угрожать повторным продажам',
+              signal: 'Проблемы качества начинают угрожать повторным продажам',
               action: 'Разобрать причины по продукту, филиалу или команде'
             };
           }
@@ -1146,8 +1220,8 @@
           title: 'Повторные жалобы',
           hint: 'Показывает, решает ли сервис проблему клиента с первого раза',
           fields: [
-            { name: 'repeat', label: 'Повторные жалобы, шт' },
-            { name: 'total', label: 'Всего обращений, шт' }
+            { name: 'repeat', label: 'Повторные жалобы, шт.' },
+            { name: 'total', label: 'Всего обращений, шт.' }
           ],
           calc: function (v) {
             var value = pct(n(v, 'repeat'), n(v, 'total'));
@@ -1166,8 +1240,8 @@
           title: 'Срывы сроков поставки / работ',
           hint: 'Показывает риск штрафов, скидок и ухода клиентов',
           fields: [
-            { name: 'delayed', label: 'Заказы с нарушением срока, шт' },
-            { name: 'total', label: 'Всего заказов, шт' }
+            { name: 'delayed', label: 'Заказы с нарушением срока, шт.' },
+            { name: 'total', label: 'Всего заказов, шт.' }
           ],
           calc: function (v) {
             var value = pct(n(v, 'delayed'), n(v, 'total'));
@@ -1183,11 +1257,11 @@
         {
           id: 'compensations',
           group: 'service',
-          title: 'Компенсации клиентам из-за операционных сбоев',
-          hint: 'Показывает, начинают ли операционные сбои съедать маржу',
+          title: 'Компенсации клиентам из-за сбоев',
+          hint: 'Показывает, как часто ошибки в качестве, сроках или сервисе уже приводят к финансовым уступкам клиентам',
           fields: [
-            { name: 'compensated', label: 'Заказы, по которым выплатили компенсацию из-за сбоя, шт' },
-            { name: 'total', label: 'Всего выполненных заказов, шт' }
+            { name: 'compensated', label: 'Заказы, по которым дали компенсацию из-за сбоя, шт.' },
+            { name: 'total', label: 'Все выполненные заказы за период, шт.' }
           ],
           calc: function (v) {
             var value = pct(n(v, 'compensated'), n(v, 'total'));
@@ -1195,8 +1269,8 @@
               value: round(value, 1) + '%',
               threshold: 'желтый: выше 5%, красный: выше 10%',
               status: highBad(value, 5, 10),
-              signal: 'Скидки, штрафы и бонусы уже превращают операционные сбои в финансовые потери',
-              action: 'Разобрать причины компенсаций и устранить повторяющиеся причины'
+              signal: 'Операционные сбои уже приводят к скидкам, штрафам, бесплатным работам или возвратам клиентам',
+              action: 'Разобрать, из-за каких продуктов, клиентов, филиалов или команд компания чаще всего дает компенсации, и устранить повторяющиеся причины'
             };
           }
         },
@@ -1206,8 +1280,8 @@
           title: 'Повторные покупки / повторные заказы',
           hint: 'Показывает, не слабеет ли клиентская база',
           fields: [
-            { name: 'repeatClients', label: 'Клиенты с повторными заказами, шт' },
-            { name: 'activeClients', label: 'Активные клиенты, шт' }
+            { name: 'repeatClients', label: 'Клиенты с повторными заказами, шт.' },
+            { name: 'activeClients', label: 'Активные клиенты, шт.' }
           ],
           calc: function (v) {
             var value = pct(n(v, 'repeatClients'), n(v, 'activeClients'));
@@ -1228,7 +1302,12 @@
       var outputPanels = root.querySelector('[data-fd-output-panels]');
       var inputArea = root.querySelector('[data-fd-input-area]');
       var resultArea = root.querySelector('[data-fd-result-area]');
-      var currentFilter = 'all';
+
+      var selectedStatuses = {
+        green: true,
+        yellow: true,
+        red: true
+      };
 
       function panelHeadHtml(groupKey) {
         var group = groups[groupKey];
@@ -1296,7 +1375,7 @@
         var values = collectIndicatorValues(indicator);
         var result = indicator.calc(values);
 
-        if (!result || result.value === null || result.value === 'NaN%' || result.value === 'NaN мес.') {
+        if (!result || result.value === null || result.value === 'NaN%' || result.value === 'NaN мес.' || result.value === 'Infinity мес.') {
           return null;
         }
 
@@ -1322,33 +1401,33 @@
           return;
         }
 
-        box.innerHTML = '<strong>' + result.value + '</strong> · статус: ' + statusLabel(result.status);
+        box.innerHTML = '<strong>' + escapeHtml(result.value) + '</strong> · статус: ' + statusLabel(result.status);
       }
 
       function buildResultCard(item) {
         return [
           '<article class="fd-crisis-output-card fd-crisis-output-card--' + item.status + '" data-fd-status="' + item.status + '">',
             '<div class="fd-crisis-output-card__top">',
-              '<h4 class="fd-crisis-output-card__title">' + item.title + '</h4>',
+              '<h4 class="fd-crisis-output-card__title">' + escapeHtml(item.title) + '</h4>',
               '<span class="fd-crisis-status">' + statusLabel(item.status) + '</span>',
             '</div>',
             '<div class="fd-crisis-values">',
               '<div class="fd-crisis-value-box">',
                 '<span class="fd-crisis-value-box__label">Расчет</span>',
-                '<span class="fd-crisis-value-box__value">' + item.value + '</span>',
+                '<span class="fd-crisis-value-box__value">' + escapeHtml(item.value) + '</span>',
               '</div>',
               '<div class="fd-crisis-value-box">',
                 '<span class="fd-crisis-value-box__label">Порог риска</span>',
-                '<span class="fd-crisis-value-box__value">' + item.threshold + '</span>',
+                '<span class="fd-crisis-value-box__value">' + escapeHtml(item.threshold) + '</span>',
               '</div>',
             '</div>',
             '<div class="fd-crisis-output-card__row">',
               '<span class="fd-crisis-output-card__label">О чем сигнализирует</span>',
-              '<p class="fd-crisis-output-card__text">' + item.signal + '</p>',
+              '<div class="fd-crisis-output-card__editable" contenteditable="true" data-fd-edit="signal">' + escapeHtml(item.signal) + '</div>',
             '</div>',
             '<div class="fd-crisis-output-card__row">',
               '<span class="fd-crisis-output-card__label">Что делать</span>',
-              '<p class="fd-crisis-output-card__text">' + item.action + '</p>',
+              '<div class="fd-crisis-output-card__editable" contenteditable="true" data-fd-edit="action">' + escapeHtml(item.action) + '</div>',
             '</div>',
           '</article>'
         ].join('');
@@ -1374,21 +1453,36 @@
         });
       }
 
-      function applyFilter(filter) {
-        currentFilter = filter;
+      function updateFilterButtons() {
+        var allSelected = selectedStatuses.green && selectedStatuses.yellow && selectedStatuses.red;
 
         root.querySelectorAll('[data-fd-filter]').forEach(function (button) {
-          button.classList.toggle('fd-crisis-filter__button--active', button.getAttribute('data-fd-filter') === filter);
+          var filter = button.getAttribute('data-fd-filter');
+
+          if (filter === 'all') {
+            button.classList.toggle('fd-crisis-filter__button--active', allSelected);
+            return;
+          }
+
+          button.classList.toggle('fd-crisis-filter__button--active', !!selectedStatuses[filter]);
         });
+      }
+
+      function applyFilter() {
+        updateFilterButtons();
 
         root.querySelectorAll('[data-fd-output-panel]').forEach(function (panel) {
           var visibleCount = 0;
 
           panel.querySelectorAll('.fd-crisis-output-card').forEach(function (card) {
             var status = card.getAttribute('data-fd-status');
-            var show = filter === 'all' || status === filter;
+            var show = !!selectedStatuses[status];
+
             card.hidden = !show;
-            if (show) visibleCount += 1;
+
+            if (show) {
+              visibleCount += 1;
+            }
           });
 
           var empty = panel.querySelector('.fd-crisis-empty');
@@ -1432,7 +1526,7 @@
 
         inputArea.classList.add('fd-crisis-input-area--hidden');
         resultArea.classList.add('fd-crisis-result-area--visible');
-        applyFilter(currentFilter);
+        applyFilter();
         resultArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
 
@@ -1459,7 +1553,9 @@
           return item.id === id;
         });
 
-        if (indicator) updateLiveResult(indicator);
+        if (indicator) {
+          updateLiveResult(indicator);
+        }
       });
 
       root.querySelector('[data-fd-build]').addEventListener('click', buildDashboard);
@@ -1480,7 +1576,18 @@
 
       root.querySelectorAll('[data-fd-filter]').forEach(function (button) {
         button.addEventListener('click', function () {
-          applyFilter(button.getAttribute('data-fd-filter'));
+          var filter = button.getAttribute('data-fd-filter');
+
+          if (filter === 'all') {
+            selectedStatuses.green = true;
+            selectedStatuses.yellow = true;
+            selectedStatuses.red = true;
+            applyFilter();
+            return;
+          }
+
+          selectedStatuses[filter] = !selectedStatuses[filter];
+          applyFilter();
         });
       });
 
