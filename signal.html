@@ -897,14 +897,18 @@
         </div>
 
         <div class="fd-crisis-input-actions" style="margin:0;padding:0;border:0;">
-          <button class="fd-crisis-button fd-crisis-button--ghost" type="button" data-fd-back>
-            Вернуться к вводу
-          </button>
-          <button class="fd-crisis-button fd-crisis-button--primary" type="button" data-fd-print>
-            Скачать PDF
-          </button>
-        </div>
-      </div>
+  <button class="fd-crisis-button fd-crisis-button--ghost" type="button" data-fd-back>
+    Вернуться к вводу
+  </button>
+
+  <button class="fd-crisis-button fd-crisis-button--ghost" type="button" data-fd-ppt>
+    Скачать PPT
+  </button>
+
+  <button class="fd-crisis-button fd-crisis-button--primary" type="button" data-fd-print>
+    Скачать PDF
+  </button>
+</div>
 
       <nav class="fd-crisis-tabs fd-crisis-output-tabs" data-fd-output-tabs aria-label="Вкладки дашборда"></nav>
       <div data-fd-output-panels></div>
@@ -916,6 +920,8 @@
     </section>
   </div>
 
+<script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+  
   <script>
     (function () {
       var root = document.currentScript.closest('.fd-crisis-dashboard');
@@ -1721,6 +1727,119 @@
         });
       });
 
+root.querySelector('[data-fd-ppt]').addEventListener('click', function () {
+  if (typeof pptxgen === 'undefined') {
+    alert('Библиотека для выгрузки PPT не загрузилась. Проверьте, разрешает ли сайт подключение внешних скриптов.');
+    return;
+  }
+
+  var pptx = new pptxgen();
+  pptx.layout = 'LAYOUT_WIDE';
+
+  root.querySelectorAll('.fd-crisis-output-panel').forEach(function (panel) {
+    var title = panel.querySelector('.fd-crisis-panel-title')?.textContent || 'Кризис-панель';
+    var cards = Array.from(panel.querySelectorAll('.fd-crisis-output-card')).filter(function (card) {
+      return !card.hidden;
+    });
+
+    if (!cards.length) return;
+
+    var slide = pptx.addSlide();
+    slide.background = { color: 'EDE0F3' };
+
+    slide.addText(title, {
+      x: 0.4, y: 0.3, w: 12.5, h: 0.4,
+      fontFace: 'Arial',
+      fontSize: 20,
+      bold: true,
+      color: '77408C'
+    });
+
+    cards.slice(0, 6).forEach(function (card, i) {
+      var col = i % 3;
+      var row = Math.floor(i / 3);
+      var x = 0.4 + col * 4.3;
+      var y = 1 + row * 2.8;
+
+      var status = card.getAttribute('data-fd-status');
+      var color = status === 'red' ? 'D9534F' : status === 'yellow' ? 'F2B84B' : '4C9F70';
+
+      var cardTitle = card.querySelector('.fd-crisis-output-card__title')?.textContent || '';
+      var value = card.querySelector('.fd-crisis-value-box__value')?.textContent || '';
+      var edits = card.querySelectorAll('.fd-crisis-output-card__editable');
+      var signal = edits[0]?.innerText || '';
+      var action = edits[1]?.innerText || '';
+
+      slide.addShape(pptx.ShapeType.roundRect, {
+        x: x,
+        y: y,
+        w: 4,
+        h: 2.45,
+        fill: { color: 'FFFFFF' },
+        line: { color: 'D9C7E4' },
+        radius: 0.15
+      });
+
+      slide.addShape(pptx.ShapeType.rect, {
+        x: x,
+        y: y,
+        w: 4,
+        h: 0.08,
+        fill: { color: color },
+        line: { color: color }
+      });
+
+      slide.addText(cardTitle, {
+        x: x + 0.15,
+        y: y + 0.15,
+        w: 2.8,
+        h: 0.35,
+        fontSize: 11,
+        bold: true,
+        color: '2A2A2A'
+      });
+
+      slide.addText(value, {
+        x: x + 0.15,
+        y: y + 0.55,
+        w: 3.7,
+        h: 0.3,
+        fontSize: 12,
+        bold: true,
+        color: '5F2F72'
+      });
+
+      slide.addText('О чем сигнализирует: ' + signal, {
+        x: x + 0.15,
+        y: y + 0.95,
+        w: 3.7,
+        h: 0.55,
+        fontSize: 8.5,
+        color: '2A2A2A',
+        fit: 'shrink'
+      });
+
+      slide.addText('Что делать: ' + action, {
+        x: x + 0.15,
+        y: y + 1.55,
+        w: 3.7,
+        h: 0.7,
+        fontSize: 8.5,
+        color: '2A2A2A',
+        fit: 'shrink'
+      });
+    });
+  });
+
+  pptx.writeFile({ fileName: 'crisis-panel.pptx' });
+});
+
+root.querySelectorAll('[data-fd-print]').forEach(function (button) {
+  button.addEventListener('click', function () {
+    window.print();
+  });
+});
+      
       root.querySelectorAll('[data-fd-print]').forEach(function (button) {
         button.addEventListener('click', function () {
           window.print();
