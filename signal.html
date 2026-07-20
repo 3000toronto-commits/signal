@@ -951,6 +951,7 @@
 <button class="fd-crisis-filter__button fd-crisis-filter__button--red" type="button" data-fd-filter="red">
   Красные
 </button>
+          </div>
 
         <div class="fd-crisis-result-actions">
           <button class="fd-crisis-button fd-crisis-button--ghost" type="button" data-fd-back>
@@ -1743,6 +1744,8 @@ var showAllStatuses = true;
         }
       });
 
+root.querySelector('[data-fd-build]').addEventListener('click', buildDashboard);
+      
         root.querySelector('[data-fd-back]').addEventListener('click', function () {
         resultArea.classList.remove('fd-crisis-result-area--visible');
         inputArea.classList.remove('fd-crisis-input-area--hidden');
@@ -1789,8 +1792,7 @@ var showAllStatuses = true;
     applyFilter();
   });
 });
-      root.querySelector('[data-fd-ppt]').addEventListener('click', downloadPpt);
-
+     
       root.querySelectorAll('[data-fd-print]').forEach(function (button) {
         button.addEventListener('click', function () {
           window.print();
