@@ -91,6 +91,15 @@
       cursor: pointer;
     }
 
+.fd-crisis-button--download {
+  min-width: 86px;
+  min-height: 50px;
+  padding: 8px 12px;
+  line-height: 1.15;
+  text-align: center;
+  white-space: normal;
+}
+    
     .fd-crisis-button--primary {
       color: #fff;
       background: var(--fd-primary);
@@ -329,17 +338,28 @@
     }
 
     .fd-crisis-result-controls {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 14px;
-      padding: 12px 14px;
-      background: #fff;
-      border: 1px solid var(--fd-border);
-      border-radius: 16px;
-    }
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 14px;
+  padding: 16px 14px;
+  background: #fff;
+  border: 1px solid var(--fd-border);
+  border-radius: 16px;
+}
 
+.fd-crisis-result-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  max-width: 300px;
+}
+    
     .fd-crisis-filter {
       display: flex;
       flex-wrap: wrap;
@@ -896,20 +916,19 @@
           </button>
         </div>
 
-        <div class="fd-crisis-input-actions" style="margin:0;padding:0;border:0;">
+        <div class="fd-crisis-result-actions">
   <button class="fd-crisis-button fd-crisis-button--ghost" type="button" data-fd-back>
     Вернуться к вводу
   </button>
 
-  <button class="fd-crisis-button fd-crisis-button--ghost" type="button" data-fd-ppt>
-    Скачать PPT
-  </button>
+  <button class="fd-crisis-button fd-crisis-button--ghost fd-crisis-button--download" type="button" data-fd-ppt>
+  Скачать<br>PPT
+</button>
 
-  <button class="fd-crisis-button fd-crisis-button--primary" type="button" data-fd-print>
-    Скачать PDF
-  </button>
-</div>
-
+<button class="fd-crisis-button fd-crisis-button--primary fd-crisis-button--download" type="button" data-fd-print>
+  Скачать<br>PDF
+</button>
+          
       <nav class="fd-crisis-tabs fd-crisis-output-tabs" data-fd-output-tabs aria-label="Вкладки дашборда"></nav>
       <div data-fd-output-panels></div>
 
