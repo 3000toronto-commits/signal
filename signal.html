@@ -390,12 +390,35 @@
       cursor: pointer;
     }
 
-    .fd-crisis-filter__button--active {
-      color: #fff;
-      background: var(--fd-primary);
-      border-color: var(--fd-primary);
-    }
+.fd-crisis-filter__button--green {
+  color: #fff;
+  background: var(--fd-green);
+  border-color: var(--fd-green);
+}
 
+.fd-crisis-filter__button--yellow {
+  color: #4b3300;
+  background: var(--fd-yellow);
+  border-color: var(--fd-yellow);
+}
+
+.fd-crisis-filter__button--red {
+  color: #fff;
+  background: var(--fd-red);
+  border-color: var(--fd-red);
+}
+    
+    .fd-crisis-filter__button--active {
+  box-shadow: 0 0 0 3px rgba(119, 64, 140, 0.18);
+  transform: translateY(-1px);
+}
+
+.fd-crisis-filter__button--green:not(.fd-crisis-filter__button--active),
+.fd-crisis-filter__button--yellow:not(.fd-crisis-filter__button--active),
+.fd-crisis-filter__button--red:not(.fd-crisis-filter__button--active) {
+  opacity: 0.55;
+}
+    
     .fd-crisis-output-cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -914,21 +937,20 @@
           <span class="fd-crisis-filter__label">Показать:</span>
 
           <button class="fd-crisis-filter__button fd-crisis-filter__button--active" type="button" data-fd-filter="all">
-            Все индикаторы
-          </button>
+  Все индикаторы
+</button>
 
-          <button class="fd-crisis-filter__button" type="button" data-fd-filter="green">
-            Зеленые
-          </button>
+<button class="fd-crisis-filter__button fd-crisis-filter__button--green" type="button" data-fd-filter="green">
+  Зеленые
+</button>
 
-          <button class="fd-crisis-filter__button" type="button" data-fd-filter="yellow">
-            Желтые
-          </button>
+<button class="fd-crisis-filter__button fd-crisis-filter__button--yellow" type="button" data-fd-filter="yellow">
+  Желтые
+</button>
 
-          <button class="fd-crisis-filter__button" type="button" data-fd-filter="red">
-            Красные
-          </button>
-        </div>
+<button class="fd-crisis-filter__button fd-crisis-filter__button--red" type="button" data-fd-filter="red">
+  Красные
+</button>
 
         <div class="fd-crisis-result-actions">
           <button class="fd-crisis-button fd-crisis-button--ghost" type="button" data-fd-back>
