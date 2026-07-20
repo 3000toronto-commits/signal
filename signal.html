@@ -695,24 +695,35 @@
         flex: 0 0 auto;
       }
 
-      .fd-crisis-period label {
-        color: #fff;
-        font-size: 9px;
-        line-height: 1;
-        font-weight: 700;
-      }
+      .fd-crisis-period {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: auto;
+  min-width: 0;
+  flex: 0 0 auto;
+}
 
-      .fd-crisis-period input {
-        width: 120px;
-        min-height: 22px;
-        padding: 3px 6px;
-        color: #2A2A2A;
-        font-size: 8.5px;
-        line-height: 1;
-        background: #fff;
-        border: 0;
-        border-radius: 5px;
-      }
+.fd-crisis-period label {
+  display: none !important;
+}
+
+.fd-crisis-period input {
+  width: 240px;
+  min-height: 44px;
+  padding: 7px 12px;
+  color: #2A2A2A;
+  font-size: 17px;
+  line-height: 1.2;
+  background: #fff;
+  border: 0;
+  border-radius: 8px;
+}
+
+.fd-crisis-period input:focus {
+  outline: none;
+  box-shadow: none;
+}
 
       .fd-crisis-result-area {
         display: block !important;
@@ -922,10 +933,6 @@
         <div class="fd-crisis-result-actions">
           <button class="fd-crisis-button fd-crisis-button--ghost" type="button" data-fd-back>
             Вернуться к вводу
-          </button>
-
-          <button class="fd-crisis-button fd-crisis-button--ghost fd-crisis-button--download" type="button" data-fd-ppt>
-            Скачать<br>PPT
           </button>
 
           <button class="fd-crisis-button fd-crisis-button--primary fd-crisis-button--download" type="button" data-fd-print>
