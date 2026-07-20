@@ -390,35 +390,41 @@
       cursor: pointer;
     }
 
-.fd-crisis-filter__button--green {
-  color: #fff;
-  background: var(--fd-green);
-  border-color: var(--fd-green);
-}
+    .fd-crisis-filter__button--green {
+      color: #fff;
+      background: var(--fd-green);
+      border-color: var(--fd-green);
+    }
 
-.fd-crisis-filter__button--yellow {
-  color: #4b3300;
-  background: var(--fd-yellow);
-  border-color: var(--fd-yellow);
-}
+    .fd-crisis-filter__button--yellow {
+      color: #4b3300;
+      background: var(--fd-yellow);
+      border-color: var(--fd-yellow);
+    }
 
-.fd-crisis-filter__button--red {
-  color: #fff;
-  background: var(--fd-red);
-  border-color: var(--fd-red);
-}
-    
+    .fd-crisis-filter__button--red {
+      color: #fff;
+      background: var(--fd-red);
+      border-color: var(--fd-red);
+    }
+
     .fd-crisis-filter__button--active {
-  box-shadow: 0 0 0 3px rgba(119, 64, 140, 0.18);
-  transform: translateY(-1px);
-}
+      box-shadow: 0 0 0 3px rgba(119, 64, 140, 0.18);
+      transform: translateY(-1px);
+    }
 
-.fd-crisis-filter__button--green:not(.fd-crisis-filter__button--active),
-.fd-crisis-filter__button--yellow:not(.fd-crisis-filter__button--active),
-.fd-crisis-filter__button--red:not(.fd-crisis-filter__button--active) {
-  opacity: 0.55;
-}
-    
+    .fd-crisis-filter__button[data-fd-filter="all"].fd-crisis-filter__button--active {
+      color: #fff;
+      background: var(--fd-primary);
+      border-color: var(--fd-primary);
+    }
+
+    .fd-crisis-filter__button--green:not(.fd-crisis-filter__button--active),
+    .fd-crisis-filter__button--yellow:not(.fd-crisis-filter__button--active),
+    .fd-crisis-filter__button--red:not(.fd-crisis-filter__button--active) {
+      opacity: 0.55;
+    }
+
     .fd-crisis-output-cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -592,20 +598,20 @@
 
     @media (max-width: 900px) {
       .fd-crisis-header {
-  flex-direction: row;
-  align-items: flex-start;
-}
+        flex-direction: row;
+        align-items: flex-start;
+      }
 
-.fd-crisis-result-controls {
-  flex-direction: column;
-  align-items: flex-start;
-}
+      .fd-crisis-result-controls {
+        flex-direction: column;
+        align-items: flex-start;
+      }
 
       .fd-crisis-period {
-  width: 220px;
-  min-width: 220px;
-  flex: 0 0 220px;
-}
+        width: 220px;
+        min-width: 220px;
+        flex: 0 0 220px;
+      }
 
       .fd-crisis-result-actions {
         justify-content: flex-start;
@@ -718,35 +724,26 @@
         flex: 0 0 auto;
       }
 
-      .fd-crisis-period {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  width: auto;
-  min-width: 0;
-  flex: 0 0 auto;
-}
+      .fd-crisis-period label {
+        display: none !important;
+      }
 
-.fd-crisis-period label {
-  display: none !important;
-}
+      .fd-crisis-period input {
+        width: 240px;
+        min-height: 44px;
+        padding: 7px 12px;
+        color: #2A2A2A;
+        font-size: 17px;
+        line-height: 1.2;
+        background: #fff;
+        border: 0;
+        border-radius: 8px;
+      }
 
-.fd-crisis-period input {
-  width: 240px;
-  min-height: 44px;
-  padding: 7px 12px;
-  color: #2A2A2A;
-  font-size: 17px;
-  line-height: 1.2;
-  background: #fff;
-  border: 0;
-  border-radius: 8px;
-}
-
-.fd-crisis-period input:focus {
-  outline: none;
-  box-shadow: none;
-}
+      .fd-crisis-period input:focus {
+        outline: none;
+        box-shadow: none;
+      }
 
       .fd-crisis-result-area {
         display: block !important;
@@ -911,7 +908,7 @@
           <div class="fd-crisis-input-intro__title">Введите исходные данные</div>
           <div class="fd-crisis-input-intro__text">
             Используйте только те индикаторы, которые подходят вашему бизнесу.
-            В дашборд попадут показатели, по которым есть полный набор исходных данных
+            В дашборд попадут показатели, по которым есть полный набор исходных данных.
           </div>
         </div>
       </div>
@@ -937,21 +934,21 @@
           <span class="fd-crisis-filter__label">Показать:</span>
 
           <button class="fd-crisis-filter__button fd-crisis-filter__button--active" type="button" data-fd-filter="all">
-  Все индикаторы
-</button>
+            Все индикаторы
+          </button>
 
-<button class="fd-crisis-filter__button fd-crisis-filter__button--green" type="button" data-fd-filter="green">
-  Зеленые
-</button>
+          <button class="fd-crisis-filter__button fd-crisis-filter__button--green" type="button" data-fd-filter="green">
+            Зеленые
+          </button>
 
-<button class="fd-crisis-filter__button fd-crisis-filter__button--yellow" type="button" data-fd-filter="yellow">
-  Желтые
-</button>
+          <button class="fd-crisis-filter__button fd-crisis-filter__button--yellow" type="button" data-fd-filter="yellow">
+            Желтые
+          </button>
 
-<button class="fd-crisis-filter__button fd-crisis-filter__button--red" type="button" data-fd-filter="red">
-  Красные
-</button>
-          </div>
+          <button class="fd-crisis-filter__button fd-crisis-filter__button--red" type="button" data-fd-filter="red">
+            Красные
+          </button>
+        </div>
 
         <div class="fd-crisis-result-actions">
           <button class="fd-crisis-button fd-crisis-button--ghost" type="button" data-fd-back>
@@ -977,7 +974,10 @@
 
   <script>
     (function () {
-      var root = document.currentScript.closest('.fd-crisis-dashboard');
+      var currentScript = document.currentScript;
+      var root = currentScript ? currentScript.closest('.fd-crisis-dashboard') : document.querySelector('.fd-crisis-dashboard');
+
+      if (!root) return;
 
       var groups = {
         demand: {
@@ -1490,12 +1490,12 @@
       var resultArea = root.querySelector('[data-fd-result-area]');
 
       var selectedStatuses = {
-  green: false,
-  yellow: false,
-  red: false
-};
+        green: false,
+        yellow: false,
+        red: false
+      };
 
-var showAllStatuses = true;
+      var showAllStatuses = true;
 
       function panelHeadHtml(groupKey) {
         var group = groups[groupKey];
@@ -1642,41 +1642,41 @@ var showAllStatuses = true;
       }
 
       function updateFilterButtons() {
-  root.querySelectorAll('[data-fd-filter]').forEach(function (button) {
-    var filter = button.getAttribute('data-fd-filter');
+        root.querySelectorAll('[data-fd-filter]').forEach(function (button) {
+          var filter = button.getAttribute('data-fd-filter');
 
-    if (filter === 'all') {
-      button.classList.toggle('fd-crisis-filter__button--active', showAllStatuses);
-      return;
-    }
+          if (filter === 'all') {
+            button.classList.toggle('fd-crisis-filter__button--active', showAllStatuses);
+            return;
+          }
 
-    button.classList.toggle('fd-crisis-filter__button--active', !showAllStatuses && !!selectedStatuses[filter]);
-  });
-}
+          button.classList.toggle('fd-crisis-filter__button--active', !showAllStatuses && !!selectedStatuses[filter]);
+        });
+      }
 
       function applyFilter() {
-  updateFilterButtons();
+        updateFilterButtons();
 
-  root.querySelectorAll('[data-fd-output-panel]').forEach(function (panel) {
-    var visibleCount = 0;
+        root.querySelectorAll('[data-fd-output-panel]').forEach(function (panel) {
+          var visibleCount = 0;
 
-    panel.querySelectorAll('.fd-crisis-output-card').forEach(function (card) {
-      var status = card.getAttribute('data-fd-status');
-      var show = showAllStatuses || !!selectedStatuses[status];
+          panel.querySelectorAll('.fd-crisis-output-card').forEach(function (card) {
+            var status = card.getAttribute('data-fd-status');
+            var show = showAllStatuses || !!selectedStatuses[status];
 
-      card.hidden = !show;
+            card.hidden = !show;
 
-      if (show) {
-        visibleCount += 1;
+            if (show) {
+              visibleCount += 1;
+            }
+          });
+
+          var empty = panel.querySelector('.fd-crisis-empty');
+          if (empty) {
+            empty.classList.toggle('fd-crisis-empty--visible', visibleCount === 0);
+          }
+        });
       }
-    });
-
-    var empty = panel.querySelector('.fd-crisis-empty');
-    if (empty) {
-      empty.classList.toggle('fd-crisis-empty--visible', visibleCount === 0);
-    }
-  });
-}
 
       function buildDashboard() {
         var calculated = indicators.map(calculateIndicator).filter(Boolean);
@@ -1718,16 +1718,80 @@ var showAllStatuses = true;
 
       renderInput();
 
-      inputTabs.addEventListener('click', function (event) {
-        var tab = event.target.closest('[data-fd-input-tab]');
-        if (!tab) return;
-        switchInputTab(tab.getAttribute('data-fd-input-tab'));
-      });
+      root.addEventListener('click', function (event) {
+        var inputTab = event.target.closest('[data-fd-input-tab]');
+        if (inputTab) {
+          switchInputTab(inputTab.getAttribute('data-fd-input-tab'));
+          return;
+        }
 
-      outputTabs.addEventListener('click', function (event) {
-        var tab = event.target.closest('[data-fd-output-tab]');
-        if (!tab) return;
-        switchOutputTab(tab.getAttribute('data-fd-output-tab'));
+        var outputTab = event.target.closest('[data-fd-output-tab]');
+        if (outputTab) {
+          switchOutputTab(outputTab.getAttribute('data-fd-output-tab'));
+          return;
+        }
+
+        var buildButton = event.target.closest('[data-fd-build]');
+        if (buildButton) {
+          buildDashboard();
+          return;
+        }
+
+        var backButton = event.target.closest('[data-fd-back]');
+        if (backButton) {
+          resultArea.classList.remove('fd-crisis-result-area--visible');
+          inputArea.classList.remove('fd-crisis-input-area--hidden');
+          inputArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          return;
+        }
+
+        var clearButton = event.target.closest('[data-fd-clear]');
+        if (clearButton) {
+          root.querySelectorAll('.fd-crisis-field input').forEach(function (input) {
+            input.value = '';
+          });
+
+          indicators.forEach(updateLiveResult);
+          return;
+        }
+
+        var filterButton = event.target.closest('[data-fd-filter]');
+        if (filterButton) {
+          var filter = filterButton.getAttribute('data-fd-filter');
+
+          if (filter === 'all') {
+            showAllStatuses = true;
+            selectedStatuses.green = false;
+            selectedStatuses.yellow = false;
+            selectedStatuses.red = false;
+            applyFilter();
+            return;
+          }
+
+          if (showAllStatuses) {
+            showAllStatuses = false;
+            selectedStatuses.green = false;
+            selectedStatuses.yellow = false;
+            selectedStatuses.red = false;
+            selectedStatuses[filter] = true;
+            applyFilter();
+            return;
+          }
+
+          selectedStatuses[filter] = !selectedStatuses[filter];
+
+          if (!selectedStatuses.green && !selectedStatuses.yellow && !selectedStatuses.red) {
+            showAllStatuses = true;
+          }
+
+          applyFilter();
+          return;
+        }
+
+        var printButton = event.target.closest('[data-fd-print]');
+        if (printButton) {
+          window.print();
+        }
       });
 
       root.addEventListener('input', function (event) {
@@ -1742,61 +1806,6 @@ var showAllStatuses = true;
         if (indicator) {
           updateLiveResult(indicator);
         }
-      });
-
-root.querySelector('[data-fd-build]').addEventListener('click', buildDashboard);
-      
-        root.querySelector('[data-fd-back]').addEventListener('click', function () {
-        resultArea.classList.remove('fd-crisis-result-area--visible');
-        inputArea.classList.remove('fd-crisis-input-area--hidden');
-        inputArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
-
-      root.querySelector('[data-fd-clear]').addEventListener('click', function () {
-        root.querySelectorAll('.fd-crisis-field input').forEach(function (input) {
-          input.value = '';
-        });
-
-        indicators.forEach(updateLiveResult);
-      });
-
-      root.querySelectorAll('[data-fd-filter]').forEach(function (button) {
-  button.addEventListener('click', function () {
-    var filter = button.getAttribute('data-fd-filter');
-
-    if (filter === 'all') {
-      showAllStatuses = true;
-      selectedStatuses.green = false;
-      selectedStatuses.yellow = false;
-      selectedStatuses.red = false;
-      applyFilter();
-      return;
-    }
-
-    if (showAllStatuses) {
-      showAllStatuses = false;
-      selectedStatuses.green = false;
-      selectedStatuses.yellow = false;
-      selectedStatuses.red = false;
-      selectedStatuses[filter] = true;
-      applyFilter();
-      return;
-    }
-
-    selectedStatuses[filter] = !selectedStatuses[filter];
-
-    if (!selectedStatuses.green && !selectedStatuses.yellow && !selectedStatuses.red) {
-      showAllStatuses = true;
-    }
-
-    applyFilter();
-  });
-});
-     
-      root.querySelectorAll('[data-fd-print]').forEach(function (button) {
-        button.addEventListener('click', function () {
-          window.print();
-        });
       });
     })();
   </script>
