@@ -723,12 +723,42 @@
       }
 
       .fd-crisis-output-card::before,
-      .fd-crisis-status,
-      .fd-crisis-value-box {
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-      }
+.fd-crisis-status,
+.fd-crisis-value-box,
+.fd-crisis-panel-head,
+.fd-crisis-panel-icon,
+.fd-crisis-header {
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
 
+.fd-crisis-output-card--green::before {
+  background: #4C9F70 !important;
+}
+
+.fd-crisis-output-card--yellow::before {
+  background: #F2B84B !important;
+}
+
+.fd-crisis-output-card--red::before {
+  background: #D9534F !important;
+}
+
+.fd-crisis-status {
+  color: #fff !important;
+  background: #4C9F70 !important;
+}
+
+.fd-crisis-output-card--yellow .fd-crisis-status {
+  color: #4b3300 !important;
+  background: #F2B84B !important;
+}
+
+.fd-crisis-output-card--red .fd-crisis-status {
+  color: #fff !important;
+  background: #D9534F !important;
+}
+  
       .fd-crisis-output-card__title {
         font-size: 11px;
       }
