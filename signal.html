@@ -39,49 +39,45 @@
     .fd-crisis-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  min-height: 0;
-  margin: 0 0 10px;
-  padding: 14px 16px;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 22px 24px;
   color: #fff;
-  background: #77408C !important;
-  -webkit-print-color-adjust: exact;
-  print-color-adjust: exact;
+  background: linear-gradient(135deg, var(--fd-primary), var(--fd-primary-dark));
 }
 
 .fd-crisis-title {
   margin: 0;
-  font-size: 18px;
-  line-height: 1.15;
+  font-size: 28px;
+  line-height: 1.1;
+  font-weight: 700;
 }
 
 .fd-crisis-period {
   display: flex;
-  align-items: center;
-  gap: 6px;
-  width: auto;
-  min-width: 0;
-  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 220px;
+  flex: 0 0 220px;
 }
 
 .fd-crisis-period label {
-  color: #fff;
-  font-size: 9px;
-  line-height: 1;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 12px;
   font-weight: 700;
 }
 
 .fd-crisis-period input {
-  width: 120px;
-  min-height: 22px;
-  padding: 3px 6px;
-  color: #2A2A2A;
-  font-size: 8.5px;
-  line-height: 1;
+  width: 100%;
+  min-height: 38px;
+  padding: 8px 11px;
+  color: var(--fd-text);
+  font-size: 14px;
   background: #fff;
   border: 0;
-  border-radius: 5px;
+  border-radius: 10px;
+}
+    
     .fd-crisis-button {
       display: inline-flex;
       align-items: center;
@@ -635,33 +631,51 @@
       }
 
       .fd-crisis-header {
-        display: flex;
-        padding: 14px 12px 12px;
-        color: #fff;
-        background: #77408C !important;
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-      }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  min-height: 0;
+  margin: 0 0 10px;
+  padding: 14px 16px;
+  color: #fff;
+  background: #77408C !important;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
 
-      .fd-crisis-title {
-        font-size: 20px;
-      }
+.fd-crisis-title {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.15;
+}
 
-      .fd-crisis-period {
-        min-width: 180px;
-        flex: 0 0 180px;
-      }
+.fd-crisis-period {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: auto;
+  min-width: 0;
+  flex: 0 0 auto;
+}
 
-      .fd-crisis-period label {
-        font-size: 8px;
-      }
+.fd-crisis-period label {
+  color: #fff;
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 700;
+}
 
-      .fd-crisis-period input {
-        min-height: 24px;
-        padding: 4px 6px;
-        font-size: 9px;
-        border: 1px solid rgba(255,255,255,0.5);
-      }
+.fd-crisis-period input {
+  width: 120px;
+  min-height: 22px;
+  padding: 3px 6px;
+  color: #2A2A2A;
+  font-size: 8.5px;
+  line-height: 1;
+  background: #fff;
+  border: 0;
+  border-radius: 5px;
 
       .fd-crisis-result-area {
         display: block !important;
