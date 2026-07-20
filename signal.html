@@ -568,17 +568,21 @@
     }
 
     @media (max-width: 900px) {
-      .fd-crisis-header,
-      .fd-crisis-result-controls {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+      .fd-crisis-header {
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.fd-crisis-result-controls {
+  flex-direction: column;
+  align-items: flex-start;
+}
 
       .fd-crisis-period {
-        width: 100%;
-        min-width: 0;
-        flex: 0 0 auto;
-      }
+  width: 220px;
+  min-width: 220px;
+  flex: 0 0 220px;
+}
 
       .fd-crisis-result-actions {
         justify-content: flex-start;
