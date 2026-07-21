@@ -17,6 +17,9 @@
       --fd-green: #4C9F70;
       --fd-yellow: #F2B84B;
       --fd-red: #D9534F;
+      --fd-olive: #8A8F56;
+      --fd-olive-dark: #707545;
+      --fd-olive-light: #F2F3E8;
 
       width: 100%;
       max-width: 1180px;
@@ -189,20 +192,25 @@
     .fd-crisis-tab {
       min-height: 42px;
       padding: 9px 12px;
-      color: var(--fd-primary);
+      color: var(--fd-olive-dark);
       font-size: 13px;
       font-weight: 700;
       text-align: center;
-      background: #fff;
-      border: 1px solid var(--fd-border);
+      background: var(--fd-olive-light);
+      border: 1px solid rgba(138, 143, 86, 0.28);
       border-radius: 12px;
       cursor: pointer;
     }
 
     .fd-crisis-tab--active {
       color: #fff;
-      background: var(--fd-primary);
-      border-color: var(--fd-primary);
+      background: var(--fd-olive);
+      border-color: var(--fd-olive);
+    }
+
+    .fd-crisis-tab:hover {
+      border-color: var(--fd-olive);
+      box-shadow: 0 0 0 3px rgba(138, 143, 86, 0.12);
     }
 
     .fd-crisis-input-panel,
